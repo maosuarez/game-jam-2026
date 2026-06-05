@@ -1,3 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+.mcp.json
+addons/godot_mcp/
+/docs
+CLAUDE.md
