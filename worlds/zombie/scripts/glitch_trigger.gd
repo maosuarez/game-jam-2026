@@ -14,7 +14,7 @@ func activate() -> void:
 		return
 	_active = true
 	monitoring = true
-	monitorable = true
+	set_deferred("monitorable", true)
 	_start_glitch_effect()
 	await get_tree().create_timer(2.0).timeout
 	level_completed.emit()

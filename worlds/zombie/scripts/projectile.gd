@@ -9,8 +9,11 @@ var _is_enemy_projectile: bool = false
 
 func _ready() -> void:
 	_is_enemy_projectile = get_meta("enemy_projectile", false)
+	if _is_enemy_projectile:
+		collision_mask = 1  # impacta al jugador (capa 1)
+	else:
+		collision_mask = 2  # impacta a enemigos (capa 2)
 	body_entered.connect(_on_body_entered)
-	area_entered.connect(_on_area_entered)
 
 func _physics_process(delta: float) -> void:
 	if direction != Vector2.ZERO:
@@ -22,22 +25,10 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if _is_enemy_projectile:
-		if body.is_in_group("player") or body.has_method("take_damage") and not body.is_in_group("enemies"):
-			if body.has_method("take_damage"):
-				body.take_damage(damage)
+		if body.is_in_group("player") and body.has_method("take_damage"):
+			body.take_damage(damage)
 			queue_free()
 	else:
 		if body.is_in_group("enemies") and body.has_method("take_damage"):
 			body.take_damage(damage)
 			queue_free()
-
-func _on_area_entered(area: Node) -> void:
-	if _is_enemy_projectile:
-		if area.is_in_group("player_hitbox"):
-			var parent = area.get_parent()
-			if parent.has_method("take_damage"):
-				parent.take_damage(damage)
-			queue_free()
-	else:
-		# Hits walls
-		pass

@@ -17,6 +17,7 @@ var double_shot: bool = false
 var damage_boost: bool = false
 var speed_boost: bool = false
 var _boost_timers: Dictionary = {}
+var _damage_cooldown: float = 0.0
 
 @onready var shoot_point: Marker2D = $ShootPoint
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -26,11 +27,30 @@ func _ready() -> void:
 	hp = max_hp
 	hp_changed.emit(hp)
 	add_to_group("player")
+	hitbox.body_entered.connect(_on_hitbox_body_entered)
 
 func _physics_process(delta: float) -> void:
+	_damage_cooldown = max(0.0, _damage_cooldown - delta)
+	if _damage_cooldown <= 0.0:
+		_check_overlapping_enemies()
 	_handle_movement(delta)
 	_handle_shoot(delta)
 	_update_boost_timers(delta)
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemies") and _damage_cooldown <= 0.0:
+		_deal_contact_damage(body)
+
+func _check_overlapping_enemies() -> void:
+	for body in hitbox.get_overlapping_bodies():
+		if body.is_in_group("enemies"):
+			_deal_contact_damage(body)
+			return
+
+func _deal_contact_damage(enemy: Node2D) -> void:
+	var dmg: int = enemy.get("damage") if "damage" in enemy else 1
+	_damage_cooldown = 0.8
+	take_damage(dmg)
 
 func _handle_movement(_delta: float) -> void:
 	var direction := Vector2.ZERO
