@@ -1,4 +1,4 @@
-extends State
+extends PlayerState
 
 @export var jump_velocity: float = -500.0
 @export var jump_cut_multiplier: float = 0.8

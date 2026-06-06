@@ -1,4 +1,4 @@
-extends State
+extends PlayerState
 
 func update(delta: float):
 	if(player.isHurt):

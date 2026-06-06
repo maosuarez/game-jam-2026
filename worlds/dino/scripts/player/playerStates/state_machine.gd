@@ -2,16 +2,16 @@ extends Node
 
 var player: Player
 var states: Dictionary = {}
-@export var initial_state: State
+@export var initial_state: PlayerState
 
-var current_state: State
+var current_state: PlayerState
 
 func _ready():
 	pass
 
 func init():
 	for child in get_children():
-		if child is State:
+		if child is PlayerState:
 			child.player = player
 			states[child.name.to_lower()] = child
 			child.Transitioned.connect(on_child_transition)

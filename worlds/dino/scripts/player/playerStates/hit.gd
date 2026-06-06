@@ -1,4 +1,4 @@
-extends State
+extends PlayerState
 
 @export var kbx_speed = 100.0
 @export var kby_speed = -200.0
