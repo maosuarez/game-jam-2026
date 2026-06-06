@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5fhof8iycn60"
-path="res://.godot/imported/dino_run.png-4d50059fa27ad9fa17d039945ef24b05.ctex"
+uid="uid://bw54cjun264it"
+path="res://.godot/imported/random_object.png-762188ce51c5e04d93b60f6b1a21b477.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://worlds/dino/assets/entities/enemies/dino_run.png"
-dest_files=["res://.godot/imported/dino_run.png-4d50059fa27ad9fa17d039945ef24b05.ctex"]
+source_file="res://worlds/dino/assets/entities/enemies/random_object.png"
+dest_files=["res://.godot/imported/random_object.png-762188ce51c5e04d93b60f6b1a21b477.ctex"]
 
 [params]
 

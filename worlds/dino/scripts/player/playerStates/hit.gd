@@ -7,10 +7,10 @@ func enter():
 	super()
 	player.velocity.x = kbx_speed * player.kb_dir
 	player.velocity.y = kby_speed
-	player.recoil = Vector2.ZERO
 	player.kb_timer.start()
 
 func physics_update(delta: float):
+	player.recoil = Vector2.ZERO
 	player.velocity.y += Global.gravity * delta
 
 func _on_kb_timer_timeout() -> void:

@@ -1,14 +1,21 @@
 [gd_scene format=3 uid="uid://78bsejbpvbfw"]
 
-[ext_resource type="Script" uid="uid://c3qxn7dvghool" path="res://worlds/dino/scripts/enemies/green_dino.gd" id="1_56l4e"]
+[ext_resource type="Script" uid="uid://dpgrdni85d4jv" path="res://worlds/dino/scripts/enemies/Enemy.gd" id="1_5xag0"]
+[ext_resource type="Resource" uid="uid://b3g62y2v1fb6" path="res://worlds/dino/resources/dinos/green_dino.tres" id="2_ofr6i"]
 [ext_resource type="PackedScene" uid="uid://duxyutgksgjgq" path="res://worlds/dino/scenes/hurtzone.tscn" id="3_0bjbq"]
-[ext_resource type="Texture2D" uid="uid://5fhof8iycn60" path="res://worlds/dino/assets/entities/enemies/dino_run.png" id="3_5xag0"]
+[ext_resource type="Texture2D" uid="uid://5fhof8iycn60" path="res://worlds/dino/assets/entities/enemies/green_dino_run.png" id="3_5xag0"]
+[ext_resource type="Shader" uid="uid://dvjkgft7b8ft2" path="res://worlds/dino/scenes/hit_shader.gdshader" id="3_ofr6i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5xag0"]
 size = Vector2(19, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0bjbq"]
 size = Vector2(19, 15)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ecqw"]
+shader = ExtResource("3_ofr6i")
+shader_parameter/isDead = false
+shader_parameter/flash_amount = 0.0
 
 [sub_resource type="Animation" id="Animation_ofr6i"]
 length = 0.001
@@ -51,9 +58,8 @@ _data = {
 
 [node name="Green Dino" type="CharacterBody2D" unique_id=1031729652]
 collision_layer = 4
-script = ExtResource("1_56l4e")
-recoil_stop = 300.0
-acc = 150.0
+script = ExtResource("1_5xag0")
+stats = ExtResource("2_ofr6i")
 metadata/_custom_type_script = "uid://dpgrdni85d4jv"
 
 [node name="RayCast" type="RayCast2D" parent="." unique_id=1647204498]
@@ -71,6 +77,7 @@ position = Vector2(0.5, 5.5)
 shape = SubResource("RectangleShape2D_0bjbq")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1185574163]
+material = SubResource("ShaderMaterial_4ecqw")
 texture = ExtResource("3_5xag0")
 flip_h = true
 hframes = 8

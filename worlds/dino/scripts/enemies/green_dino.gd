@@ -2,10 +2,6 @@ extends Enemy
 
 func _ready() -> void:
 	super()
-	hurtbox.damage = base_damage
-	velocity.x = speed
-	sprite.texture = Ref.GreenDinoSheet
-	add_to_group("enemies")
 
 func _process(delta: float) -> void:
 	pass

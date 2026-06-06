@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DinoStats" format=3 uid="uid://ccqxx8o3wqtww"]
+
+[ext_resource type="Script" uid="uid://dqjfqwtaiurxd" path="res://worlds/dino/resources/dinos/DinoStats.gd" id="1_7lgut"]
+
+[resource]
+script = ExtResource("1_7lgut")
+texturePath = "res://worlds/dino/assets/entities/enemies/blue_dino_run.png"
+hp = 10.0
+base_damage = 20.0
+speed = 100.0
+acc = 200.0
+metadata/_custom_type_script = "uid://dqjfqwtaiurxd"
