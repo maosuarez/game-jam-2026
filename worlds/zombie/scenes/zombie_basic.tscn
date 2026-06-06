@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://ctwaybbpqf7r4"]
+
+[ext_resource type="Script" uid="uid://bnhabowgrrhxa" path="res://worlds/zombie/scripts/zombie_basic.gd" id="1_23obq"]
+[ext_resource type="Texture2D" uid="uid://dbha688trdij5" path="res://worlds/zombie/assets/sprites/enemies/skeleton/SpriteSheet.png" id="2_rdnc8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rdnc8"]
+radius = 4.1231055
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rdnc8"]
+atlas = ExtResource("2_rdnc8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xh7oa"]
+atlas = ExtResource("2_rdnc8")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfnac"]
+atlas = ExtResource("2_rdnc8")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dldim"]
+atlas = ExtResource("2_rdnc8")
+region = Rect2(16, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vbl5"]
+atlas = ExtResource("2_rdnc8")
+region = Rect2(32, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fq0r"]
+atlas = ExtResource("2_rdnc8")
+region = Rect2(48, 64, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lr8tc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rdnc8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xh7oa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfnac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dldim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vbl5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fq0r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ZombieBasic" type="CharacterBody2D" unique_id=1548598745]
+script = ExtResource("1_23obq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1805974038]
+shape = SubResource("CircleShape2D_rdnc8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=392426047]
+sprite_frames = SubResource("SpriteFrames_lr8tc")
+frame_progress = 0.695589
