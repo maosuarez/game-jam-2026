@@ -24,6 +24,7 @@ var kb_dir: int
 
 func _ready():
 	Global.player = self
+	animation_component.sprite.texture = Ref.PlayerSheet
 	add_to_group("player")
 
 func _process(delta: float):
@@ -58,7 +59,7 @@ func apply_recoil(direction: Vector2, force: float):
 
 func _on_death_timer_timeout() -> void:
 	Engine.time_scale = 1.0
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://worlds/dino/scenes/game.tscn")
 
 func _on_attack_timer_timeout() -> void:
 	attackbox.monitoring = false
@@ -69,8 +70,9 @@ func _on_attack_box_area_entered(area: Area2D) -> void:
 
 func _on_attack_box_body_entered(body: Node2D) -> void:
 	if(body.is_in_group("enemies")):
+		if body.isDead: return
 		var dir = sign(global_position.x - body.global_position.x)
 		
-		body.hurt(base_damage)
 		apply_recoil(Vector2(dir, 0.0), self_recoil_force)
 		body.apply_recoil(Vector2(-dir, 0.0), recoil_force)
+		body.hurt(base_damage)

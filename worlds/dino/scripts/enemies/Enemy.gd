@@ -2,7 +2,7 @@ class_name Enemy
 extends CharacterBody2D
 
 @onready var ray_cast: RayCast2D = $RayCast
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sprite: Sprite2D = $Sprite
 @onready var hurtbox: HurtZone = $HurtZone
 
 @export var hp: float
@@ -12,13 +12,15 @@ extends CharacterBody2D
 @export var acc = 100.0
 
 var isDead = false
+var canTurn = false
 
 var direction = 1
 var recoil_dir = 1
 var recoil := Vector2.ZERO
 
 func _ready() -> void:
-	pass
+	await get_tree().create_timer(0.1).timeout
+	canTurn = true
 
 func _process(delta: float) -> void:
 	pass
@@ -32,7 +34,7 @@ func _physics_process(delta: float) -> void:
 		if(recoil_dir == self.direction):
 			velocity.x += speed * direction
 	
-	if !isDead:
+	if !isDead && canTurn && is_on_floor():
 		if is_on_wall() || !ray_cast.is_colliding():
 			change_direction()
 	
@@ -56,12 +58,14 @@ func kill():
 
 func change_direction():
 	direction *= -1
-	animated_sprite.flip_h = (direction == -1)
+	sprite.flip_h = (direction == 1)
 	ray_cast.position.x *= -1
 	ray_cast.target_position.x *= -1
 	velocity.x = speed * direction
 
 func apply_recoil(direction: Vector2, force: float):
+	if isDead:
+		return
 	recoil_dir = direction.x
 	velocity.x = 0.0
 	recoil = direction * force

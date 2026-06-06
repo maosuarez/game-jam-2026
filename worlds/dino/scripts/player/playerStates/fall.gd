@@ -19,7 +19,7 @@ func physics_update(delta: float):
 	player.velocity.x = move_toward(player.velocity.x, movement, stop_acc*delta)
 	#player.move_and_slide()
 	
-	if Input.is_action_just_pressed("jump") && player.jump_buffer.is_stopped():
+	if Input.is_action_pressed("jump") && player.jump_buffer.is_stopped():
 		player.jump_buffer.start()
 		#print("Jump Buffer Started")
 	

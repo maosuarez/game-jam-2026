@@ -6,11 +6,11 @@ signal Transitioned
 var player: Player
 @onready var state_machine: Node = self.get_parent()
 
-var run_speed: float = 200
-var walk_speed: float = 120
-var stop_acc: float = 900
-var start_acc: float = 1500
-var run_acc: float = 1500
+const run_speed: float = 150
+const walk_speed: float = 100
+const stop_acc: float = 900
+const start_acc: float = 1500
+const run_acc: float = 1500
 
 var air_speed
 var isRunning: bool = false
