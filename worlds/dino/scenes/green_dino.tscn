@@ -51,8 +51,11 @@ size = Vector2(12, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0bjbq"]
 size = Vector2(12, 12)
 
-[node name="Green Dino" type="Node2D" unique_id=1114028490]
+[node name="Green Dino" type="CharacterBody2D" unique_id=1031729652]
+collision_layer = 4
 script = ExtResource("1_56l4e")
+recoil_stop = 300.0
+acc = 150.0
 metadata/_custom_type_script = "uid://dpgrdni85d4jv"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1305834097]
@@ -60,13 +63,9 @@ sprite_frames = SubResource("SpriteFrames_c11hp")
 animation = &"moving"
 autoplay = "moving"
 
-[node name="RayCastRight" type="RayCast2D" parent="." unique_id=1647204498]
+[node name="RayCast" type="RayCast2D" parent="." unique_id=1647204498]
 position = Vector2(6, 0)
-target_position = Vector2(0, 12)
-
-[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1142630813]
-position = Vector2(-6, 0)
-target_position = Vector2(0, 12)
+target_position = Vector2(1, 13)
 
 [node name="HurtZone" parent="." unique_id=1052918236 instance=ExtResource("3_0bjbq")]
 
@@ -74,8 +73,6 @@ target_position = Vector2(0, 12)
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_5xag0")
 
-[node name="HitBox" type="Area2D" parent="." unique_id=591273525]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=670722569]
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=670722569]
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_0bjbq")

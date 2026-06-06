@@ -12,6 +12,7 @@ func enter():
 		isRunning = true
 
 func physics_update(delta: float):
+	super(delta)
 	if(player.isHurt):
 		Transitioned.emit(self, "hit")
 		return

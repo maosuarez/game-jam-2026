@@ -1,12 +1,13 @@
 extends State
 
-@export var kb_speed = 100.0
+@export var kbx_speed = 100.0
 @export var kby_speed = -200.0
 
 func enter():
 	super()
-	player.velocity.x = kb_speed * player.kb_dir
+	player.velocity.x = kbx_speed * player.kb_dir
 	player.velocity.y = kby_speed
+	player.recoil = Vector2.ZERO
 	player.kb_timer.start()
 
 func physics_update(delta: float):

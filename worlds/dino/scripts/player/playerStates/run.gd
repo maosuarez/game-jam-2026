@@ -15,6 +15,7 @@ func update(delta: float):
 		return
 
 func physics_update(delta: float):
+	super(delta)
 	var movement = handle_horizontal_movement(delta)
 	
 	if movement != 0:

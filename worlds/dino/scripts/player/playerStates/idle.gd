@@ -20,5 +20,8 @@ func update(delta: float):
 			Transitioned.emit(self, "walk")
 
 func physics_update(delta: float):
+	super(delta)
 	if !player.is_on_floor():
 		Transitioned.emit(self, "fall")
+	if player.velocity.x:
+		Transitioned.emit(self, "skid")

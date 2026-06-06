@@ -15,6 +15,7 @@ func update(delta: float):
 			Transitioned.emit(self, "walk")
 
 func physics_update(delta: float):
+	super(delta)
 	player.velocity.x = move_toward(player.velocity.x, 0, stop_acc*delta)
 	#player.move_and_slide()
 	if player.velocity.x == 0:

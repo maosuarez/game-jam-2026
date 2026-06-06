@@ -2,15 +2,11 @@ extends Node2D
 
 @export var player: Player
 @onready var sprite = $PlayerSprite
-@onready var animation_tree = $PlayerSprite/PlayerAnimationTree
+@onready var animation_player = $PlayerSprite/PlayerAnimationPlayer
 var movement = 1
-var aux = 0
 
 func _ready():
-	animation_tree.active = false
-	sprite.texture = (Ref.PlayerSheet)
-	aux = 0
-	animation_tree.active = true
+	pass
 
 func _process(delta: float):
 	pass
@@ -20,6 +16,8 @@ func _physics_process(delta: float):
 	
 	if(Global.player.isDead): movement = 0
 	if movement < 0:
+		player.attackbox.position.x = -37
 		sprite.flip_h = true
 	elif movement > 0:
+		player.attackbox.position.x = 0
 		sprite.flip_h = false

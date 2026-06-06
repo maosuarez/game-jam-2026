@@ -16,8 +16,9 @@ var air_speed
 var isRunning: bool = false
 
 func enter():
-	#print(self.name)
-	pass
+	print(self.name)
+	if(player.animation_component):
+		player.animation_component.animation_player.play(self.name)
 
 func exit():
 	pass

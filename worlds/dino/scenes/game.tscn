@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bhg3seuk1clds" path="res://worlds/dino/scripts/game.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://cqgyu8xnryely" path="res://worlds/dino/scenes/killzone.tscn" id="3_rt1c4"]
 [ext_resource type="PackedScene" uid="uid://78bsejbpvbfw" path="res://worlds/dino/scenes/green_dino.tscn" id="5_jrhjf"]
+[ext_resource type="PackedScene" uid="uid://cqsks5p2084yl" path="res://worlds/dino/scenes/portal.tscn" id="6_duuyx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u5mow"]
 texture = ExtResource("1_7cmxk")
@@ -97,8 +98,7 @@ tile_set = SubResource("TileSet_2dtyg")
 [node name="Player" parent="." unique_id=1059074241 instance=ExtResource("1_d3t3k")]
 z_index = 5
 position = Vector2(0, 7)
-collision_layer = 2
-base_damage = 10.0
+recoil_force = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1069345479]
 zoom = Vector2(3, 3)
@@ -122,3 +122,6 @@ base_damage = 10.0
 position = Vector2(50, 4)
 hp = 20.0
 base_damage = 10.0
+
+[node name="Portal" parent="." unique_id=1066161918 instance=ExtResource("6_duuyx")]
+position = Vector2(1188, -48)
