@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://h5n5r6hrl1n"]
+
+[ext_resource type="Script" uid="uid://1byvpbeaxc1i" path="res://worlds/zombie/scripts/boss_cyclop.gd" id="1_cmo0e"]
+[ext_resource type="Texture2D" uid="uid://bdauqgyw7ps4y" path="res://worlds/zombie/assets/sprites/enemies/skull/SpriteSheet.png" id="2_um6un"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uymul"]
+radius = 22.0
+height = 50.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bejx4"]
+atlas = ExtResource("2_um6un")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugf8g"]
+atlas = ExtResource("2_um6un")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjyaa"]
+atlas = ExtResource("2_um6un")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dfk7"]
+atlas = ExtResource("2_um6un")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtd2v"]
+atlas = ExtResource("2_um6un")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s16hy"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bejx4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ugf8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjyaa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dfk7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtd2v")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="BossCyclop" type="CharacterBody2D" unique_id=1310302431]
+script = ExtResource("1_cmo0e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1937038901]
+shape = SubResource("CapsuleShape2D_uymul")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=275758747]
+sprite_frames = SubResource("SpriteFrames_s16hy")
+animation = &"new_animation"
+frame = 4
+frame_progress = 0.5587171

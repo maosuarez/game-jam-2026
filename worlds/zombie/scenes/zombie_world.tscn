@@ -1,0 +1,378 @@
+[gd_scene format=3 uid="uid://b6r7shc1fesat"]
+
+[ext_resource type="Script" uid="uid://dpo45hhc17g38" path="res://worlds/zombie/scripts/zombie_world.gd" id="1_grgv6"]
+[ext_resource type="Script" uid="uid://tklj6gftlj43" path="res://worlds/zombie/scripts/wave_manager.gd" id="2_kclv7"]
+[ext_resource type="Texture2D" uid="uid://dbqn1vcif1wjp" path="res://worlds/zombie/assets/tilesets/TilesetVillageAbandoned.png" id="2_qj41x"]
+[ext_resource type="Script" uid="uid://dhfjnifok76fm" path="res://worlds/zombie/scripts/glitch_trigger.gd" id="3_qj41x"]
+[ext_resource type="Script" uid="uid://de3itfph3dbay" path="res://worlds/zombie/scripts/hud.gd" id="4_2li0s"]
+[ext_resource type="PackedScene" uid="uid://cu4h7ejlgokcn" path="res://worlds/zombie/scenes/player.tscn" id="5_t3ck3"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2li0s"]
+texture = ExtResource("2_qj41x")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+16:0/0 = 0
+17:0/0 = 0
+18:0/0 = 0
+19:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+14:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+17:1/0 = 0
+18:1/0 = 0
+19:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+14:2/0 = 0
+15:2/0 = 0
+16:2/0 = 0
+17:2/0 = 0
+18:2/0 = 0
+19:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+18:3/0 = 0
+19:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+12:4/0 = 0
+13:4/0 = 0
+14:4/0 = 0
+15:4/0 = 0
+16:4/0 = 0
+17:4/0 = 0
+18:4/0 = 0
+19:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+12:5/0 = 0
+13:5/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+16:5/0 = 0
+17:5/0 = 0
+18:5/0 = 0
+19:5/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+12:6/0 = 0
+13:6/0 = 0
+14:6/0 = 0
+15:6/0 = 0
+16:6/0 = 0
+17:6/0 = 0
+18:6/0 = 0
+19:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+12:7/0 = 0
+13:7/0 = 0
+14:7/0 = 0
+15:7/0 = 0
+16:7/0 = 0
+17:7/0 = 0
+18:7/0 = 0
+19:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+9:8/0 = 0
+10:8/0 = 0
+11:8/0 = 0
+12:8/0 = 0
+13:8/0 = 0
+14:8/0 = 0
+15:8/0 = 0
+16:8/0 = 0
+17:8/0 = 0
+18:8/0 = 0
+19:8/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
+9:9/0 = 0
+10:9/0 = 0
+11:9/0 = 0
+12:9/0 = 0
+13:9/0 = 0
+14:9/0 = 0
+15:9/0 = 0
+16:9/0 = 0
+17:9/0 = 0
+18:9/0 = 0
+19:9/0 = 0
+0:10/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+4:10/0 = 0
+5:10/0 = 0
+6:10/0 = 0
+7:10/0 = 0
+8:10/0 = 0
+9:10/0 = 0
+10:10/0 = 0
+11:10/0 = 0
+12:10/0 = 0
+13:10/0 = 0
+14:10/0 = 0
+15:10/0 = 0
+16:10/0 = 0
+17:10/0 = 0
+18:10/0 = 0
+19:10/0 = 0
+0:11/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+3:11/0 = 0
+4:11/0 = 0
+5:11/0 = 0
+6:11/0 = 0
+7:11/0 = 0
+8:11/0 = 0
+9:11/0 = 0
+10:11/0 = 0
+11:11/0 = 0
+12:11/0 = 0
+13:11/0 = 0
+14:11/0 = 0
+15:11/0 = 0
+16:11/0 = 0
+17:11/0 = 0
+18:11/0 = 0
+19:11/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_t3ck3"]
+sources/0 = SubResource("TileSetAtlasSource_2li0s")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_grgv6"]
+radius = 6.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qj41x"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2li0s"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_t3ck3"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_k6q0f"]
+
+[node name="ZombieWorld" type="Node2D" unique_id=707025959]
+script = ExtResource("1_grgv6")
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=350370629]
+tile_set = SubResource("TileSet_t3ck3")
+
+[node name="WaveManager" type="Node" parent="." unique_id=1403279781]
+script = ExtResource("2_kclv7")
+
+[node name="Player" parent="." unique_id=1168080295 instance=ExtResource("5_t3ck3")]
+
+[node name="GlitchTrigger" type="Area2D" parent="." unique_id=1872690601]
+script = ExtResource("3_qj41x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GlitchTrigger" unique_id=1675355721]
+shape = SubResource("CircleShape2D_grgv6")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1908628595]
+script = ExtResource("4_2li0s")
+
+[node name="KillsBar" type="ProgressBar" parent="HUD" unique_id=1781635649]
+custom_minimum_size = Vector2(300, 22)
+offset_left = 20.0
+offset_top = 12.0
+offset_right = 320.0
+offset_bottom = 34.0
+max_value = 15.0
+metadata/_edit_use_anchors_ = true
+
+[node name="WaveLabel" type="Label" parent="HUD" unique_id=1241230064]
+offset_left = 24.0
+offset_top = 42.0
+offset_right = 200.0
+offset_bottom = 64.0
+text = "Wave 0 / 3"
+metadata/_edit_use_anchors_ = true
+
+[node name="HPContainer" type="HBoxContainer" parent="HUD" unique_id=1173814153]
+offset_left = 20.0
+offset_top = 104.0
+offset_right = 200.0
+offset_bottom = 128.0
+metadata/_edit_use_anchors_ = true
+
+[node name="GameOverLabel" type="Label" parent="HUD" unique_id=1152649330]
+visible = false
+offset_left = 300.0
+offset_top = 200.0
+offset_right = 300.0
+offset_bottom = 200.0
+text = "GAME OVER"
+
+[node name="WaveAnnounce" type="Label" parent="HUD" unique_id=648463471]
+visible = false
+offset_left = 280.0
+offset_top = 160.0
+offset_right = 280.0
+offset_bottom = 160.0
+text = "WAVE 1"
+
+[node name="BossLabel" type="Label" parent="HUD" unique_id=1732377926]
+visible = false
+offset_left = 270.0
+offset_top = 130.0
+offset_right = 270.0
+offset_bottom = 130.0
+text = "BOSS INCOMING!"
+
+[node name="ScoreLabel" type="Label" parent="HUD" unique_id=1923697857]
+modulate = Color(1, 0.9, 0.2, 1)
+offset_left = 26.0
+offset_top = 70.0
+offset_right = 200.0
+offset_bottom = 92.0
+text = "Score: 0"
+
+[node name="LimitesJuego" type="Node" parent="." unique_id=1388098376]
+
+[node name="WallTop" type="StaticBody2D" parent="LimitesJuego" unique_id=181739848]
+position = Vector2(0, -300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LimitesJuego/WallTop" unique_id=33136944]
+rotation = 3.1415927
+shape = SubResource("WorldBoundaryShape2D_qj41x")
+
+[node name="WallBottom" type="StaticBody2D" parent="LimitesJuego" unique_id=1296295940]
+position = Vector2(0, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LimitesJuego/WallBottom" unique_id=1036587007]
+shape = SubResource("WorldBoundaryShape2D_2li0s")
+
+[node name="WallLeft" type="StaticBody2D" parent="LimitesJuego" unique_id=587041673]
+position = Vector2(-430, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LimitesJuego/WallLeft" unique_id=383675174]
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_t3ck3")
+
+[node name="WallRight" type="StaticBody2D" parent="LimitesJuego" unique_id=906782072]
+position = Vector2(430, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LimitesJuego/WallRight" unique_id=1588475071]
+rotation = 4.712389
+shape = SubResource("WorldBoundaryShape2D_k6q0f")
+
+[node name="PuntosGeneradores" type="Node" parent="." unique_id=2137552425]
+
+[node name="SpawnTop" type="Marker2D" parent="PuntosGeneradores" unique_id=713183923]
+position = Vector2(0, -280)
+
+[node name="SpawnBottom" type="Marker2D" parent="PuntosGeneradores" unique_id=1040276408]
+position = Vector2(0, 280)
+
+[node name="SpawnLeft" type="Marker2D" parent="PuntosGeneradores" unique_id=1120283975]
+position = Vector2(-410, 0)
+
+[node name="SpawnRight" type="Marker2D" parent="PuntosGeneradores" unique_id=1260640127]
+position = Vector2(410, 0)

@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cm5l7counij2e"]
+
+[ext_resource type="Script" uid="uid://cqgd5to1hv5b3" path="res://worlds/zombie/scripts/zombie_elite.gd" id="1_x2p80"]
+[ext_resource type="Texture2D" uid="uid://l36gd7lkkuw4" path="res://worlds/zombie/assets/sprites/enemies/skeleton_demon/SpriteSheet.png" id="2_6ik2w"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ik2w"]
+radius = 14.0
+height = 32.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ik2w"]
+atlas = ExtResource("2_6ik2w")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07j3l"]
+atlas = ExtResource("2_6ik2w")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kycsw"]
+atlas = ExtResource("2_6ik2w")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lm4f"]
+atlas = ExtResource("2_6ik2w")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b0mh2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ik2w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07j3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kycsw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lm4f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ZombieElite" type="CharacterBody2D" unique_id=322950927]
+script = ExtResource("1_x2p80")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2125197079]
+shape = SubResource("CapsuleShape2D_6ik2w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=643414339]
+sprite_frames = SubResource("SpriteFrames_b0mh2")
