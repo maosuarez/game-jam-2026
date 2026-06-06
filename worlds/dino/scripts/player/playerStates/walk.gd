@@ -1,4 +1,4 @@
-extends State
+extends PlayerState
 
 var was_on_floor = false
 

@@ -21,6 +21,7 @@ var _boost_timers: Dictionary = {}
 @onready var shoot_point: Marker2D = $ShootPoint
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox: Area2D = $HitBox
+@onready var camera = $Camera2D
 
 func _ready() -> void:
 	hp = max_hp
