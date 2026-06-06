@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://duxyutgksgjgq"]
+
+[ext_resource type="Script" uid="uid://dnehbofli4fmc" path="res://worlds/dino/scripts/hurtzone.gd" id="1_b8mcc"]
+
+[node name="HurtZone" type="Area2D" unique_id=1052918236]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_b8mcc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

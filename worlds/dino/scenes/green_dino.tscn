@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://78bsejbpvbfw"]
+
+[ext_resource type="Script" uid="uid://dpgrdni85d4jv" path="res://worlds/dino/scripts/enemies/Enemy.gd" id="1_5xag0"]
+[ext_resource type="Resource" uid="uid://b3g62y2v1fb6" path="res://worlds/dino/resources/dinos/green_dino.tres" id="2_ofr6i"]
+[ext_resource type="PackedScene" uid="uid://duxyutgksgjgq" path="res://worlds/dino/scenes/hurtzone.tscn" id="3_0bjbq"]
+[ext_resource type="Texture2D" uid="uid://5fhof8iycn60" path="res://worlds/dino/assets/entities/enemies/green_dino_run.png" id="3_5xag0"]
+[ext_resource type="Shader" uid="uid://dvjkgft7b8ft2" path="res://worlds/dino/scenes/hit_shader.gdshader" id="3_ofr6i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5xag0"]
+size = Vector2(19, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0bjbq"]
+size = Vector2(19, 15)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ecqw"]
+shader = ExtResource("3_ofr6i")
+shader_parameter/isDead = false
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="Animation" id="Animation_ofr6i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_4ecqw"]
+resource_name = "run"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hu5vw"]
+_data = {
+&"RESET": SubResource("Animation_ofr6i"),
+&"run": SubResource("Animation_4ecqw")
+}
+
+[node name="Green Dino" type="CharacterBody2D" unique_id=1031729652]
+collision_layer = 4
+script = ExtResource("1_5xag0")
+stats = ExtResource("2_ofr6i")
+metadata/_custom_type_script = "uid://dpgrdni85d4jv"
+
+[node name="RayCast" type="RayCast2D" parent="." unique_id=1647204498]
+position = Vector2(10, 0)
+target_position = Vector2(1, 14)
+
+[node name="HurtZone" parent="." unique_id=1052918236 instance=ExtResource("3_0bjbq")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone" unique_id=1916027363]
+position = Vector2(0.5, 5.5)
+shape = SubResource("RectangleShape2D_5xag0")
+
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=670722569]
+position = Vector2(0.5, 5.5)
+shape = SubResource("RectangleShape2D_0bjbq")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1185574163]
+material = SubResource("ShaderMaterial_4ecqw")
+texture = ExtResource("3_5xag0")
+flip_h = true
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite" unique_id=723927961]
+libraries/ = SubResource("AnimationLibrary_hu5vw")
+autoplay = &"run"

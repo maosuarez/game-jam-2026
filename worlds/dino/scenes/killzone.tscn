@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cqgyu8xnryely"]
+
+[ext_resource type="Script" uid="uid://bruulrg82h3x7" path="res://worlds/dino/scripts/killzone.gd" id="1_21t86"]
+
+[node name="Killzone" type="Area2D" unique_id=1378491929]
+script = ExtResource("1_21t86")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

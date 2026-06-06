@@ -1,0 +1,357 @@
+[gd_scene format=3 uid="uid://bds2d3275720r"]
+
+[ext_resource type="Script" uid="uid://c3168sc5qu01l" path="res://worlds/dino/scripts/player/player.gd" id="1_f02sa"]
+[ext_resource type="Shader" uid="uid://dvjkgft7b8ft2" path="res://worlds/dino/scenes/hit_shader.gdshader" id="3_1hn7a"]
+[ext_resource type="Texture2D" uid="uid://brk87p5frju2j" path="res://worlds/dino/assets/entities/player/shoot.png" id="4_1hn7a"]
+[ext_resource type="Script" uid="uid://dawm6i21fktc" path="res://worlds/dino/scripts/player/player_animation.gd" id="4_3v2ag"]
+[ext_resource type="Script" uid="uid://cuo6a064kcfsa" path="res://worlds/dino/scripts/player/playerStates/idle.gd" id="4_tsble"]
+[ext_resource type="Texture2D" uid="uid://cr2f7rr6nq3ww" path="res://worlds/dino/assets/entities/player/player_sheet_dino.png" id="4_vocgo"]
+[ext_resource type="Script" uid="uid://b2vy1rqhici1r" path="res://worlds/dino/scripts/player/playerStates/run.gd" id="5_17tjs"]
+[ext_resource type="Script" uid="uid://chebj72f172tf" path="res://worlds/dino/scripts/player/playerStates/jump.gd" id="6_f3gpd"]
+[ext_resource type="Script" uid="uid://cxt4sacfuox" path="res://worlds/dino/scripts/player/playerStates/skid.gd" id="6_gexsm"]
+[ext_resource type="Script" uid="uid://r6ofr6xd1so8" path="res://worlds/dino/scripts/player/playerStates/fall.gd" id="7_elq50"]
+[ext_resource type="Script" uid="uid://diwhs86nqqpvy" path="res://worlds/dino/scripts/player/player_movement.gd" id="8_a8ls1"]
+[ext_resource type="Script" uid="uid://dytv68ocf005q" path="res://worlds/dino/scripts/player/playerStates/state_machine.gd" id="9_a8ls1"]
+[ext_resource type="Script" uid="uid://r2pk3khf7vyv" path="res://worlds/dino/scripts/player/playerStates/walk.gd" id="10_hnln2"]
+[ext_resource type="Script" uid="uid://dptvsnbot4lnd" path="res://worlds/dino/scripts/player/playerStates/hit.gd" id="12_8utgh"]
+[ext_resource type="Script" uid="uid://cr5w6ck6jkq3w" path="res://worlds/dino/scripts/player/attack_box.gd" id="13_2177k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vocgo"]
+shader = ExtResource("3_1hn7a")
+shader_parameter/isDead = false
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="Animation" id="Animation_qfm1y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_vocgo")]
+}
+
+[sub_resource type="Animation" id="Animation_i4ail"]
+resource_name = "fall"
+length = 0.2
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_7ulns"]
+resource_name = "hit"
+length = 0.2
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_3v2ag"]
+resource_name = "idle"
+length = 0.85
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.2857143, 0.42857143, 0.5714286, 0.71428573),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_fulsm"]
+resource_name = "jump"
+length = 0.2
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_a8ls1"]
+resource_name = "run"
+length = 1.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_vocgo"]
+resource_name = "shoot"
+step = 0.16666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.5, 0.6666667, 0.8333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_1hn7a")]
+}
+
+[sub_resource type="Animation" id="Animation_a38lo"]
+resource_name = "skid"
+length = 0.1
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_f1ej7"]
+resource_name = "walk"
+length = 3.2
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f1ej7"]
+_data = {
+&"RESET": SubResource("Animation_qfm1y"),
+&"fall": SubResource("Animation_i4ail"),
+&"hit": SubResource("Animation_7ulns"),
+&"idle": SubResource("Animation_3v2ag"),
+&"jump": SubResource("Animation_fulsm"),
+&"run": SubResource("Animation_a8ls1"),
+&"shoot": SubResource("Animation_vocgo"),
+&"skid": SubResource("Animation_a38lo"),
+&"walk": SubResource("Animation_f1ej7")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xtpjc"]
+radius = 6.0
+height = 32.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8utgh"]
+size = Vector2(25, 16)
+
+[node name="Player" type="CharacterBody2D" unique_id=21042635]
+collision_layer = 2
+script = ExtResource("1_f02sa")
+max_hp = 100.0
+base_damage = 10.0
+self_recoil_force = 100.0
+recoil_force = 300.0
+recoil_stop = 700.0
+
+[node name="PlayerAnimation" type="Node2D" parent="." unique_id=831908467 node_paths=PackedStringArray("player")]
+script = ExtResource("4_3v2ag")
+player = NodePath("..")
+
+[node name="PlayerSprite" type="Sprite2D" parent="PlayerAnimation" unique_id=1583433538]
+material = SubResource("ShaderMaterial_vocgo")
+position = Vector2(0, -16)
+texture = ExtResource("4_vocgo")
+hframes = 6
+
+[node name="PlayerAnimationPlayer" type="AnimationPlayer" parent="PlayerAnimation/PlayerSprite" unique_id=1368404599]
+libraries/ = SubResource("AnimationLibrary_f1ej7")
+autoplay = &"idle"
+
+[node name="PlayerMovement" type="Node2D" parent="." unique_id=185153674 node_paths=PackedStringArray("player")]
+script = ExtResource("8_a8ls1")
+player = NodePath("..")
+
+[node name="CoyoteTime" type="Timer" parent="PlayerMovement" unique_id=718385402]
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpBuffer" type="Timer" parent="PlayerMovement" unique_id=2102793600]
+wait_time = 0.1
+one_shot = true
+
+[node name="KBTimer" type="Timer" parent="PlayerMovement" unique_id=1623407140]
+wait_time = 0.3
+one_shot = true
+
+[node name="state_machine" type="Node" parent="PlayerMovement" unique_id=63651660 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("9_a8ls1")
+initial_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="PlayerMovement/state_machine" unique_id=694306578]
+script = ExtResource("4_tsble")
+
+[node name="run" type="Node" parent="PlayerMovement/state_machine" unique_id=934116564]
+script = ExtResource("5_17tjs")
+
+[node name="skid" type="Node" parent="PlayerMovement/state_machine" unique_id=731151308]
+script = ExtResource("6_gexsm")
+
+[node name="jump" type="Node" parent="PlayerMovement/state_machine" unique_id=834738002]
+script = ExtResource("6_f3gpd")
+jump_velocity = -400.0
+
+[node name="fall" type="Node" parent="PlayerMovement/state_machine" unique_id=521019394]
+script = ExtResource("7_elq50")
+
+[node name="walk" type="Node" parent="PlayerMovement/state_machine" unique_id=167917469]
+script = ExtResource("10_hnln2")
+
+[node name="hit" type="Node" parent="PlayerMovement/state_machine" unique_id=1957518469]
+script = ExtResource("12_8utgh")
+metadata/_custom_type_script = "uid://b56abni7o7m4r"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1711564909]
+shape = SubResource("CapsuleShape2D_xtpjc")
+
+[node name="AttackBox" type="Area2D" parent="." unique_id=80589288]
+visible = false
+collision_layer = 2
+collision_mask = 4
+monitoring = false
+script = ExtResource("13_2177k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox" unique_id=1042662577]
+position = Vector2(18.5, 0)
+shape = SubResource("RectangleShape2D_8utgh")
+debug_color = Color(0.9137255, 0, 0, 0.35686275)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AttackBox" unique_id=1982694028]
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=204711032]
+wait_time = 0.1
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="." unique_id=433716694]
+
+[node name="ChargeTimer" type="Timer" parent="." unique_id=81276351]
+wait_time = 0.4
+one_shot = true
+
+[node name="GlitchRaySpawn" type="Marker2D" parent="." unique_id=141142124]
+position = Vector2(7, 2)
+
+[node name="PlayerUI" type="Control" parent="." unique_id=1037985269]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -22.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerUI" unique_id=749212174]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 13.0
+offset_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/margin_top = 5
+
+[node name="ChargeBar" type="ProgressBar" parent="PlayerUI/MarginContainer" unique_id=1039477300]
+visible = false
+layout_mode = 2
+show_percentage = false
+
+[connection signal="timeout" from="PlayerMovement/CoyoteTime" to="." method="_on_coyote_time_timeout"]
+[connection signal="timeout" from="PlayerMovement/KBTimer" to="PlayerMovement/state_machine/hit" method="_on_kb_timer_timeout"]
+[connection signal="area_entered" from="AttackBox" to="." method="_on_attack_box_area_entered"]
+[connection signal="body_entered" from="AttackBox" to="." method="_on_attack_box_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="ChargeTimer" to="." method="_on_charge_timer_timeout"]

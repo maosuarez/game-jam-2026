@@ -1,0 +1,123 @@
+[gd_scene load_steps=14 format=3 uid="uid://bds2d3275720r"]
+
+[ext_resource type="Texture2D" uid="uid://ct7vf2q1jmkj" path="res://assets/sprites/player.png" id="1_6kj4k"]
+[ext_resource type="Script" uid="uid://c3168sc5qu01l" path="res://scripts/player/player.gd" id="1_f02sa"]
+[ext_resource type="PackedScene" uid="uid://ds7qgu05e6p6j" path="res://scenes/state_machine.tscn" id="3_kvxs2"]
+[ext_resource type="Script" uid="uid://cuo6a064kcfsa" path="res://scripts/player/playerStates/idle.gd" id="4_tsble"]
+[ext_resource type="Script" uid="uid://b2vy1rqhici1r" path="res://scripts/player/playerStates/run.gd" id="5_17tjs"]
+[ext_resource type="Script" uid="uid://chebj72f172tf" path="res://scripts/player/playerStates/jump.gd" id="6_f3gpd"]
+[ext_resource type="Script" uid="uid://cxt4sacfuox" path="res://scripts/player/playerStates/skid.gd" id="6_gexsm"]
+[ext_resource type="Script" uid="uid://r6ofr6xd1so8" path="res://scripts/player/playerStates/fall.gd" id="7_elq50"]
+[ext_resource type="Script" uid="uid://d3cv6ufj7q4vo" path="res://scripts/player/playerStates/attack.gd" id="8_h33f6"]
+[ext_resource type="Script" uid="uid://r2pk3khf7vyv" path="res://scripts/player/playerStates/walk.gd" id="10_hnln2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2reg"]
+atlas = ExtResource("1_6kj4k")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0y05v"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2reg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xtpjc"]
+radius = 6.0
+height = 32.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_f02sa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0y05v")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_xtpjc")
+
+[node name="CoyoteTime" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpBuffer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="state_machine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_kvxs2")]
+initial_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("player")]
+script = ExtResource("4_tsble")
+player = NodePath("../..")
+run_speed = null
+walk_speed = null
+stop_acc = null
+start_acc = null
+run_acc = null
+
+[node name="run" type="Node" parent="state_machine" node_paths=PackedStringArray("fall_state", "skid_state", "jump_state", "walk_state", "player")]
+script = ExtResource("5_17tjs")
+fall_state = NodePath("../fall")
+skid_state = NodePath("../skid")
+jump_state = NodePath("../jump")
+walk_state = NodePath("../walk")
+player = NodePath("../..")
+
+[node name="skid" type="Node" parent="state_machine" node_paths=PackedStringArray("fall_state", "jump_state", "walk_state", "attack_state", "idle_state", "run_state", "player")]
+script = ExtResource("6_gexsm")
+fall_state = NodePath("../fall")
+jump_state = NodePath("../jump")
+walk_state = NodePath("../walk")
+attack_state = NodePath("../attack")
+idle_state = NodePath("../idle")
+run_state = NodePath("../run")
+player = NodePath("../..")
+
+[node name="jump" type="Node" parent="state_machine" node_paths=PackedStringArray("fall_state", "idle_state", "walk_state", "skid_state", "player")]
+script = ExtResource("6_f3gpd")
+fall_state = NodePath("../fall")
+idle_state = NodePath("../idle")
+walk_state = NodePath("../walk")
+skid_state = NodePath("../skid")
+player = NodePath("../..")
+
+[node name="fall" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "skid_state", "run_state", "player")]
+script = ExtResource("7_elq50")
+idle_state = NodePath("../idle")
+walk_state = NodePath("../walk")
+jump_state = NodePath("../jump")
+skid_state = NodePath("../skid")
+run_state = NodePath("../run")
+player = NodePath("../..")
+
+[node name="attack" type="Node" parent="state_machine" node_paths=PackedStringArray("player")]
+script = ExtResource("8_h33f6")
+player = NodePath("../..")
+
+[node name="walk" type="Node" parent="state_machine" node_paths=PackedStringArray("player")]
+script = ExtResource("10_hnln2")
+player = NodePath("../..")
+run_speed = null
+walk_speed = null
+stop_acc = null
+start_acc = null
+run_acc = null
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="CoyoteTime" to="." method="_on_coyote_time_timeout"]
