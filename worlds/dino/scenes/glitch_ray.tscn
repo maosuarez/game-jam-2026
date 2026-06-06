@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dn76lsq8qj04x"]
+
+[ext_resource type="Script" uid="uid://bft7hbd77e00k" path="res://worlds/dino/scripts/player/glitch_ray.gd" id="1_tflp3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lxs6s"]
+radius = 4.0
+height = 28.0
+
+[node name="Glitch Ray" type="Area2D" unique_id=1519877966]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_tflp3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1421917804]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_lxs6s")
+debug_color = Color(0, 0.627451, 0, 0.5411765)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

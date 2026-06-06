@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://w8wlu3i0e516"]
+
+[node name="GameUI" type="CanvasLayer" unique_id=24146565]
+
+[node name="Control" type="Control" parent="." unique_id=551490615]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=947731127]
+layout_mode = 1
+offset_right = 244.0
+offset_bottom = 37.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/MarginContainer" unique_id=1166893200]
+layout_mode = 2
+step = 0.1
+value = 42.1

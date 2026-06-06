@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cxn3qw5blsywo"]
+
+[ext_resource type="Script" uid="uid://cqn2qnjkxhvm0" path="res://worlds/dino/scripts/enemies/random_object.gd" id="1_8tw71"]
+[ext_resource type="Texture2D" uid="uid://bw54cjun264it" path="res://worlds/dino/assets/entities/enemies/random_object.png" id="2_8tw71"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tw71"]
+size = Vector2(13, 15)
+
+[node name="RandomObject" type="RigidBody2D" unique_id=923971234]
+collision_layer = 8
+collision_mask = 3
+mass = 0.5
+script = ExtResource("1_8tw71")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1839661939]
+texture = ExtResource("2_8tw71")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=720473439]
+position = Vector2(0.5, 5.5)
+shape = SubResource("RectangleShape2D_8tw71")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
