@@ -2,11 +2,14 @@ extends State
 
 func enter():
 	super()
-	print("Idle")
 	player.velocity.y = 0.0
 	player.velocity.x = 0.0
 
 func update(delta: float):
+	if(player.isHurt):
+		Transitioned.emit(self, "hit")
+		return
+	
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
 		Transitioned.emit(self, "jump")
 		return

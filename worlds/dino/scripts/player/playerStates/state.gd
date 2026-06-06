@@ -4,7 +4,7 @@ extends Node
 signal Transitioned
 
 var player: Player
-@export var state_machine: Node
+@onready var state_machine: Node = self.get_parent()
 
 var run_speed: float = 200
 var walk_speed: float = 120
@@ -16,6 +16,7 @@ var air_speed
 var isRunning: bool = false
 
 func enter():
+	#print(self.name)
 	pass
 
 func exit():
@@ -37,6 +38,7 @@ func handle_horizontal_movement(delta: float):
 	if movement != 0:
 		player.velocity.x = movement
 	
+	if(Global.player.isDead || Global.player.isHurt): movement = 0
 	return movement
 
 func handle_air_horizontal_movement(delta: float):
@@ -48,4 +50,5 @@ func handle_air_horizontal_movement(delta: float):
 	
 	var movement = Input.get_axis('move_left', 'move_right') * air_speed
 	
+	if(Global.player.isDead): movement = 0
 	return movement

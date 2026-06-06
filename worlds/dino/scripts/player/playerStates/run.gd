@@ -2,10 +2,11 @@ extends State
 
 var was_on_floor = false
 
-func enter() -> void:
-	print("Run")
-
 func update(delta: float):
+	if(player.isHurt):
+		Transitioned.emit(self, "hit")
+		return
+	
 	if Input.is_action_just_pressed('jump') and (player.is_on_floor() or !player.coyote_time.is_stopped()):
 		Transitioned.emit(self, "jump")
 		return

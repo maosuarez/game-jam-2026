@@ -1,9 +1,10 @@
 extends State
 
-func enter() -> void:
-	print("Skid")
-
 func update(delta: float):
+	if(player.isHurt):
+		Transitioned.emit(self, "hit")
+		return
+	
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
 		Transitioned.emit(self, "jump")
 		return

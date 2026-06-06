@@ -5,7 +5,6 @@ extends State
 
 func enter():
 	super()
-	print("Jump")
 	player.velocity.y = jump_velocity
 	air_speed = abs(player.velocity.x)
 	isRunning = false
@@ -13,6 +12,10 @@ func enter():
 		isRunning = true
 
 func physics_update(delta: float):
+	if(player.isHurt):
+		Transitioned.emit(self, "hit")
+		return
+	
 	player.velocity.y += Global.gravity * delta
 	
 	if Input.is_action_just_released("jump") and player.velocity.y < 0.0:

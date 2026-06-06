@@ -3,18 +3,58 @@ extends CharacterBody2D
 
 @onready var coyote_time: Timer = $PlayerMovement/CoyoteTime
 @onready var jump_buffer: Timer = $PlayerMovement/JumpBuffer
+@onready var kb_timer: Timer = $PlayerMovement/KBTimer
+@onready var attack_timer: Timer = $AttackTimer
+@onready var death_timer: Timer = $DeathTimer
 @onready var movement_component = $PlayerMovement
 @onready var animation_component = $PlayerAnimation
+@onready var attackbox = $AttackBox
 
-#var attacking: bool = false
+#var isAttacking: bool = false
+var isHurt: bool = false
+var isDead: bool = false
+var kb_dir: int
+
+@export var hp: float
+@export var base_damage: float
 
 func _ready():
 	Global.player = self
+	add_to_group("player")
 
 func _process(delta: float):
 	movement_component._process(delta)
 	animation_component._process(delta)
+	
+	if Input.is_action_just_pressed("attack") && attack_timer.is_stopped():
+		attackbox.monitoring = true
+		attackbox.visible = true
+		attack_timer.start()
 
 func _physics_process(delta: float):
 	move_and_slide()
 	movement_component._physics_process(delta)
+
+func hurt(damage: float):
+	isHurt = true
+	hp -= damage;
+	#print("HP: ", hp)
+	if(hp <= 0.0):
+		kill()
+
+func kill():
+	isDead = true
+	Engine.time_scale = 0.5
+	death_timer.start()
+
+func _on_death_timer_timeout() -> void:
+	Engine.time_scale = 1.0
+	get_tree().reload_current_scene()
+
+func _on_attack_timer_timeout() -> void:
+	attackbox.monitoring = false
+	attackbox.visible = false
+
+func _on_attack_box_area_entered(area: Area2D) -> void:
+	if(area.is_in_group("enemies")):
+		area.get_parent().hurt(base_damage)

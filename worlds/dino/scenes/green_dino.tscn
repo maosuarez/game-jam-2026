@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://78bsejbpvbfw"]
+
+[ext_resource type="Script" uid="uid://c3qxn7dvghool" path="res://worlds/dino/scripts/enemies/green_dino.gd" id="1_56l4e"]
+[ext_resource type="Texture2D" uid="uid://begcldb6136ep" path="res://worlds/dino/assets/entities/enemies/slime_green.png" id="2_0bjbq"]
+[ext_resource type="PackedScene" uid="uid://duxyutgksgjgq" path="res://worlds/dino/scenes/hurtzone.tscn" id="3_0bjbq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofr6i"]
+atlas = ExtResource("2_0bjbq")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ecqw"]
+atlas = ExtResource("2_0bjbq")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hu5vw"]
+atlas = ExtResource("2_0bjbq")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tchbo"]
+atlas = ExtResource("2_0bjbq")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c11hp"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofr6i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ecqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hu5vw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tchbo")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5xag0"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0bjbq"]
+size = Vector2(12, 12)
+
+[node name="Green Dino" type="Node2D" unique_id=1114028490]
+script = ExtResource("1_56l4e")
+metadata/_custom_type_script = "uid://dpgrdni85d4jv"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1305834097]
+sprite_frames = SubResource("SpriteFrames_c11hp")
+animation = &"moving"
+autoplay = "moving"
+
+[node name="RayCastRight" type="RayCast2D" parent="." unique_id=1647204498]
+position = Vector2(6, 0)
+target_position = Vector2(0, 12)
+
+[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1142630813]
+position = Vector2(-6, 0)
+target_position = Vector2(0, 12)
+
+[node name="HurtZone" parent="." unique_id=1052918236 instance=ExtResource("3_0bjbq")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone" unique_id=1916027363]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_5xag0")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=591273525]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=670722569]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_0bjbq")

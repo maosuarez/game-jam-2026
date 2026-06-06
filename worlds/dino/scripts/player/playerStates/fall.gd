@@ -1,12 +1,16 @@
 extends State
 
 func enter():
-	print("Fall")
+	super()
 	air_speed = abs(player.velocity.x)
 	if state_machine.current_state.name != "jump" && Input.is_action_pressed("run"):
 		isRunning = true
 
 func physics_update(delta: float):
+	if(player.isHurt):
+		Transitioned.emit(self, "hit")
+		return
+	
 	player.velocity.y += Global.gravity * delta
 	
 	var movement = handle_air_horizontal_movement(delta)

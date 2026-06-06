@@ -17,6 +17,8 @@ func _process(delta: float):
 
 func _physics_process(delta: float):
 	movement = Input.get_axis("move_left", "move_right")
+	
+	if(Global.player.isDead): movement = 0
 	if movement < 0:
 		sprite.flip_h = true
 	elif movement > 0:
