@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://cu4h7ejlgokcn"]
+
+[ext_resource type="Script" uid="uid://bxejj82tjqxq3" path="res://worlds/zombie/scripts/player.gd" id="1_amhjy"]
+[ext_resource type="Texture2D" uid="uid://b5tql00buq4mh" path="res://worlds/zombie/assets/sprites/player/SpriteSheet.png" id="2_y6aue"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6aue"]
+atlas = ExtResource("2_y6aue")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyy82"]
+atlas = ExtResource("2_y6aue")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tv3ts"]
+atlas = ExtResource("2_y6aue")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0jjj"]
+atlas = ExtResource("2_y6aue")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yronl"]
+atlas = ExtResource("2_y6aue")
+region = Rect2(0, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ep58"]
+atlas = ExtResource("2_y6aue")
+region = Rect2(16, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1qox"]
+atlas = ExtResource("2_y6aue")
+region = Rect2(32, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpl0h"]
+atlas = ExtResource("2_y6aue")
+region = Rect2(48, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wyy82"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6aue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wyy82")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tv3ts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0jjj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yronl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ep58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l1qox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpl0h")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tv3ts"]
+radius = 4.1231055
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g0jjj"]
+radius = 6.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1168080295 groups=["player"]]
+script = ExtResource("1_amhjy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=695505755]
+sprite_frames = SubResource("SpriteFrames_wyy82")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1082283211]
+shape = SubResource("CircleShape2D_tv3ts")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1471723970 groups=["player_hitbox"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1095320935]
+shape = SubResource("CircleShape2D_g0jjj")
+
+[node name="ShootPoint" type="Marker2D" parent="." unique_id=664523738]
+position = Vector2(16, 0)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=120139505]
+zoom = Vector2(2.0, 2.0)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0

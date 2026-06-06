@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bo30xl0f0fxsa"]
+
+[ext_resource type="Script" uid="uid://clbosxxy2sm63" path="res://worlds/zombie/scripts/projectile.gd" id="1_j8ws0"]
+[ext_resource type="Texture2D" path="res://worlds/zombie/assets/sprites/items/Kunai.png" id="2_kunai"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j8ws0"]
+radius = 5.0
+
+[node name="Projectile" type="Area2D" unique_id=262204863]
+script = ExtResource("1_j8ws0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2011081792]
+shape = SubResource("CircleShape2D_j8ws0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1980273077]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_kunai")
