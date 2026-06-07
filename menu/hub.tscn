@@ -1,0 +1,398 @@
+[gd_scene format=3 uid="uid://0xpynw7mserc"]
+
+[ext_resource type="Script" uid="uid://cemp1yh5rr52r" path="res://menu/hub.gd" id="1_qavcp"]
+[ext_resource type="Script" uid="uid://l31wrhrcxsg0" path="res://menu/glitch_overlay.gd" id="2_g1yul"]
+[ext_resource type="Texture2D" uid="uid://hrxn02y0uxie" path="res://menu/assets/menu.jpg" id="2_k8o8v"]
+[ext_resource type="Texture2D" uid="uid://7kimt0gvw55" path="res://menu/assets/player_sheet.webp" id="4_8bwkr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypn1w"]
+atlas = ExtResource("2_k8o8v")
+region = Rect2(0, 0, 103, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqjre"]
+atlas = ExtResource("2_k8o8v")
+region = Rect2(103, 0, 103, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gm5vj"]
+atlas = ExtResource("2_k8o8v")
+region = Rect2(206, 0, 103, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sj0hk"]
+atlas = ExtResource("2_k8o8v")
+region = Rect2(309, 0, 103, 103)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltf8b"]
+atlas = ExtResource("2_k8o8v")
+region = Rect2(412, 0, 103, 103)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1yul"]
+bg_color = Color(0.54901963, 0.54901963, 0.54901963, 1)
+border_width_top = 2
+border_color = Color(0.78431374, 0.78431374, 0.78431374, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8o8v"]
+atlas = ExtResource("4_8bwkr")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bwkr"]
+atlas = ExtResource("4_8bwkr")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c661a"]
+atlas = ExtResource("4_8bwkr")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlmsy"]
+atlas = ExtResource("4_8bwkr")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqb80"]
+atlas = ExtResource("4_8bwkr")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hn0fw"]
+atlas = ExtResource("4_8bwkr")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd21a"]
+atlas = ExtResource("4_8bwkr")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tb7tw"]
+atlas = ExtResource("4_8bwkr")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52rya"]
+atlas = ExtResource("4_8bwkr")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cytyb"]
+atlas = ExtResource("4_8bwkr")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vaa6u"]
+atlas = ExtResource("4_8bwkr")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yuxq"]
+atlas = ExtResource("4_8bwkr")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ch1ix"]
+atlas = ExtResource("4_8bwkr")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lddfp"]
+atlas = ExtResource("4_8bwkr")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2ymt"]
+atlas = ExtResource("4_8bwkr")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_db0qs"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k8o8v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bwkr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c661a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mlmsy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqb80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hn0fw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fd21a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tb7tw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52rya")
+}],
+"loop": true,
+"name": &"look_up",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cytyb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vaa6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6yuxq")
+}],
+"loop": true,
+"name": &"react",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ch1ix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lddfp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2ymt")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[node name="Hub" type="Control" unique_id=303484869]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_qavcp")
+
+[node name="Background" type="ColorRect" parent="." unique_id=835412335]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.69803923, 0.69803923, 0.69803923, 1)
+
+[node name="FileBrowserWindow" type="Panel" parent="." unique_id=1900001516]
+layout_mode = 0
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.82
+
+[node name="WindowLayout" type="VBoxContainer" parent="FileBrowserWindow" unique_id=1409342480]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TitleBar" type="PanelContainer" parent="FileBrowserWindow/WindowLayout" unique_id=542921054]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="TitleRow" type="HBoxContainer" parent="FileBrowserWindow/WindowLayout/TitleBar" unique_id=790321883]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="FileBrowserWindow/WindowLayout/TitleBar/TitleRow" unique_id=1080977388]
+modulate = Color(0.22352941, 1, 0.078431375, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "  Explorador de archivos — C:\\GAMES\\"
+
+[node name="MinimizeBtn" type="Button" parent="FileBrowserWindow/WindowLayout/TitleBar/TitleRow" unique_id=423149583]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+text = "_"
+
+[node name="CloseBtn" type="Button" parent="FileBrowserWindow/WindowLayout/TitleBar/TitleRow" unique_id=135325355]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+text = "X"
+
+[node name="AddressBar" type="PanelContainer" parent="FileBrowserWindow/WindowLayout" unique_id=1426941074]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+
+[node name="AddressRow" type="HBoxContainer" parent="FileBrowserWindow/WindowLayout/AddressBar" unique_id=1397683686]
+layout_mode = 2
+
+[node name="BackBtn" type="Button" parent="FileBrowserWindow/WindowLayout/AddressBar/AddressRow" unique_id=1729703511]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "←"
+
+[node name="PathLabel" type="Label" parent="FileBrowserWindow/WindowLayout/AddressBar/AddressRow" unique_id=238771215]
+modulate = Color(0.22352941, 1, 0.078431375, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "  C:\\GAMES\\"
+
+[node name="FileArea" type="ScrollContainer" parent="FileBrowserWindow/WindowLayout" unique_id=1079279859]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FileGrid" type="GridContainer" parent="FileBrowserWindow/WindowLayout/FileArea" unique_id=871241778]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 5
+
+[node name="FolderDino" type="VBoxContainer" parent="FileBrowserWindow/WindowLayout/FileArea/FileGrid" unique_id=701704507]
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 2
+mouse_filter = 0
+alignment = 1
+
+[node name="@TextureRect@152015" type="TextureRect" parent="FileBrowserWindow/WindowLayout/FileArea/FileGrid/FolderDino" unique_id=1725281367]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_ypn1w")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FolderLabel" type="Label" parent="FileBrowserWindow/WindowLayout/FileArea/FileGrid/FolderDino" unique_id=1152703360]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "dino_world"
+horizontal_alignment = 1
+
+[node name="FolderZombie" type="VBoxContainer" parent="FileBrowserWindow/WindowLayout/FileArea/FileGrid" unique_id=2133032242]
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 2
+mouse_filter = 0
+alignment = 1
+
+[node name="@TextureRect@152016" type="TextureRect" parent="FileBrowserWindow/WindowLayout/FileArea/FileGrid/FolderZombie" unique_id=1922854258]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_pqjre")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FolderLabel" type="Label" parent="FileBrowserWindow/WindowLayout/FileArea/FileGrid/FolderZombie" unique_id=645801878]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "zombie_heaven"
+horizontal_alignment = 1
+
+[node name="FolderPuzzle" type="VBoxContainer" parent="FileBrowserWindow/WindowLayout/FileArea/FileGrid" unique_id=692665859]
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 2
+mouse_filter = 0
+alignment = 1
+
+[node name="@TextureRect@152017" type="TextureRect" parent="FileBrowserWindow/WindowLayout/FileArea/FileGrid/FolderPuzzle" unique_id=968476076]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_gm5vj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FolderLabel" type="Label" parent="FileBrowserWindow/WindowLayout/FileArea/FileGrid/FolderPuzzle" unique_id=890299430]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "puzzle_sci_fi"
+horizontal_alignment = 1
+
+[node name="FolderMix" type="VBoxContainer" parent="FileBrowserWindow/WindowLayout/FileArea/FileGrid" unique_id=2109973046]
+modulate = Color(0.33333334, 0.33333334, 0.33333334, 1)
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 2
+mouse_filter = 0
+alignment = 1
+
+[node name="@TextureRect@152018" type="TextureRect" parent="FileBrowserWindow/WindowLayout/FileArea/FileGrid/FolderMix" unique_id=1240393504]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_sj0hk")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FolderLabel" type="Label" parent="FileBrowserWindow/WindowLayout/FileArea/FileGrid/FolderMix" unique_id=801885599]
+modulate = Color(0.22352941, 1, 0.078431375, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "???_GLITCH"
+horizontal_alignment = 1
+
+[node name="FolderSystem" type="VBoxContainer" parent="FileBrowserWindow/WindowLayout/FileArea/FileGrid" unique_id=1689215192]
+custom_minimum_size = Vector2(100, 110)
+layout_mode = 2
+mouse_filter = 0
+alignment = 1
+
+[node name="@TextureRect@152019" type="TextureRect" parent="FileBrowserWindow/WindowLayout/FileArea/FileGrid/FolderSystem" unique_id=1469492291]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_ltf8b")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FolderLabel" type="Label" parent="FileBrowserWindow/WindowLayout/FileArea/FileGrid/FolderSystem" unique_id=1245470578]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SYSTEM"
+horizontal_alignment = 1
+
+[node name="Taskbar" type="Panel" parent="." unique_id=149970209]
+layout_mode = 0
+anchor_top = 0.88
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_g1yul")
+
+[node name="TaskbarRow" type="HBoxContainer" parent="Taskbar" unique_id=324987158]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_right = -8.0
+
+[node name="StartBtn" type="Button" parent="Taskbar/TaskbarRow" unique_id=894047517]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "⊞  INICIO"
+
+[node name="Spacer" type="Control" parent="Taskbar/TaskbarRow" unique_id=1580553632]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Clock" type="Label" parent="Taskbar/TaskbarRow" unique_id=26588306]
+modulate = Color(0.22352941, 1, 0.078431375, 1)
+layout_mode = 2
+text = "00:00"
+vertical_alignment = 1
+
+[node name="GlitchOverlay" type="ColorRect" parent="." unique_id=1123238755]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+script = ExtResource("2_g1yul")
+
+[node name="CharacterShadow" type="Node2D" parent="." unique_id=433111508]
+position = Vector2(120, 548)
+
+[node name="ShadowRect" type="ColorRect" parent="CharacterShadow" unique_id=1193579779]
+offset_left = -18.0
+offset_right = 18.0
+offset_bottom = 7.0
+color = Color(0, 0, 0, 0.2)
+
+[node name="Character" type="AnimatedSprite2D" parent="." unique_id=29039013]
+position = Vector2(124, 381.00003)
+scale = Vector2(4.773437, 4.6250014)
+sprite_frames = SubResource("SpriteFrames_db0qs")
+animation = &"walk"
