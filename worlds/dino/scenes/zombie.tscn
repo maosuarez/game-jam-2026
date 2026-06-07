@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://dqiso0u4w07k"]
+
+[ext_resource type="Script" uid="uid://dpgrdni85d4jv" path="res://worlds/dino/scripts/enemies/Enemy.gd" id="1_pkqu6"]
+[ext_resource type="Shader" uid="uid://cmisd32onyf0n" path="res://worlds/zombie/scenes/zombie_world.gdshader" id="2_3sblv"]
+[ext_resource type="Resource" uid="uid://bmkbo0sofe1vt" path="res://worlds/dino/resources/dinos/zombie.tres" id="2_y28lp"]
+[ext_resource type="PackedScene" uid="uid://duxyutgksgjgq" path="res://worlds/dino/scenes/hurtzone.tscn" id="3_y28lp"]
+[ext_resource type="Texture2D" uid="uid://desx17lxn2ji7" path="res://worlds/zombie/assets/sprites/enemies/zombie_run_right.png" id="4_3sblv"]
+[ext_resource type="Shader" uid="uid://dvjkgft7b8ft2" path="res://worlds/dino/scenes/hit_shader.gdshader" id="5_c71h0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y28lp"]
+radius = 6.0
+height = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c71h0"]
+shader = ExtResource("2_3sblv")
+shader_parameter/glitch_intensity = 0.0
+shader_parameter/glitch_speed = 5.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c71h0"]
+radius = 6.0
+height = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rn70v"]
+shader = ExtResource("5_c71h0")
+shader_parameter/isDead = false
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="Animation" id="Animation_rn70v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ajtke"]
+resource_name = "run"
+loop_mode = 1
+step = 0.16666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.5, 0.6666667, 0.8333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xvrbd"]
+_data = {
+&"RESET": SubResource("Animation_rn70v"),
+&"run": SubResource("Animation_ajtke")
+}
+
+[node name="Zombie" type="CharacterBody2D" unique_id=1446546969]
+collision_layer = 4
+script = ExtResource("1_pkqu6")
+stats = ExtResource("2_y28lp")
+metadata/_custom_type_script = "uid://dpgrdni85d4jv"
+
+[node name="RayCast" type="RayCast2D" parent="." unique_id=788946093]
+
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=2118297642]
+shape = SubResource("CapsuleShape2D_y28lp")
+
+[node name="Glitch" type="ColorRect" parent="." unique_id=1143537139]
+visible = false
+material = SubResource("ShaderMaterial_c71h0")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -4.0
+offset_right = 11.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HurtZone" parent="." unique_id=1052918236 instance=ExtResource("3_y28lp")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone" unique_id=1202690476]
+shape = SubResource("CapsuleShape2D_c71h0")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=671235057]
+material = SubResource("ShaderMaterial_rn70v")
+texture = ExtResource("4_3sblv")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite" unique_id=924652617]
+libraries/ = SubResource("AnimationLibrary_xvrbd")
+autoplay = &"run"

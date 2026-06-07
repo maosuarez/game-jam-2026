@@ -2,7 +2,12 @@ extends Node2D
 
 @onready var tilemap: TileMapLayer = $Background
 @onready var players = $Players
+@onready var enemies = $Enemies
+@onready var entities = $Entities
+@onready var pause_menu = $PauseMenu
+
 var active_player: CharacterBody2D
+var isPaused = false
 
 func _ready() -> void:
 	active_player = players.active_player
@@ -10,7 +15,13 @@ func _ready() -> void:
 	Global.level = self
 
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_just_pressed("pause"):
+		if !isPaused:
+			isPaused = true
+			pause_menu.pause_game()
+		else:
+			isPaused = false
+			pause_menu.resume_game()
 
 func _physics_process(delta):
 	_check_tile_mode()

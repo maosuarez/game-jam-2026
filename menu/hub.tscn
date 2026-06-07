@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://l31wrhrcxsg0" path="res://menu/glitch_overlay.gd" id="2_g1yul"]
 [ext_resource type="Texture2D" uid="uid://hrxn02y0uxie" path="res://menu/assets/menu.jpg" id="2_k8o8v"]
 [ext_resource type="Texture2D" uid="uid://7kimt0gvw55" path="res://menu/assets/player_sheet.webp" id="4_8bwkr"]
+[ext_resource type="Texture2D" uid="uid://5m262dh5cjkv" path="res://menu/assets/Animation_Oficinista.png" id="5_8bwkr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ypn1w"]
 atlas = ExtResource("2_k8o8v")
@@ -79,16 +80,28 @@ atlas = ExtResource("4_8bwkr")
 region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ch1ix"]
-atlas = ExtResource("4_8bwkr")
-region = Rect2(64, 0, 64, 64)
+atlas = ExtResource("5_8bwkr")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lddfp"]
-atlas = ExtResource("4_8bwkr")
-region = Rect2(128, 0, 64, 64)
+atlas = ExtResource("5_8bwkr")
+region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v2ymt"]
-atlas = ExtResource("4_8bwkr")
+atlas = ExtResource("5_8bwkr")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_db0qs"]
+atlas = ExtResource("5_8bwkr")
 region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wq45e"]
+atlas = ExtResource("5_8bwkr")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fisyt"]
+atlas = ExtResource("5_8bwkr")
+region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_db0qs"]
 animations = [{
@@ -157,6 +170,15 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_v2ymt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_db0qs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wq45e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fisyt")
 }],
 "loop": true,
 "name": &"walk",
@@ -168,6 +190,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_qavcp")
 
 [node name="Background" type="ColorRect" parent="." unique_id=835412335]
@@ -396,3 +420,6 @@ position = Vector2(124, 381.00003)
 scale = Vector2(4.773437, 4.6250014)
 sprite_frames = SubResource("SpriteFrames_db0qs")
 animation = &"walk"
+frame_progress = 0.77542585
+
+[connection signal="pressed" from="FileBrowserWindow/WindowLayout/TitleBar/TitleRow/CloseBtn" to="." method="_on_close_btn_pressed"]

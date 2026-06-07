@@ -15,7 +15,7 @@ func _ready() -> void:
 	if _is_enemy_projectile:
 		collision_mask = 1  # impacta al jugador (capa 1)
 	else:
-		collision_mask = 2  # impacta a enemigos (capa 2)
+		collision_mask = 3  # impacta a enemigos (capa 2)
 	body_entered.connect(_on_body_entered)
 
 func _physics_process(delta: float) -> void:
@@ -30,8 +30,12 @@ func _on_body_entered(body: Node) -> void:
 	if _is_enemy_projectile:
 		if body.is_in_group("player") and body.has_method("take_damage"):
 			body.take_damage(damage)
-			queue_free()
+		queue_free()
 	else:
 		if body.is_in_group("enemies") and body.has_method("take_damage"):
 			body.take_damage(damage)
-			queue_free()
+		queue_free()
+
+
+func _on_area_entered(area: Area2D) -> void:
+	pass

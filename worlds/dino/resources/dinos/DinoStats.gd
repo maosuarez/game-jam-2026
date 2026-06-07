@@ -7,3 +7,4 @@ extends Resource
 @export var recoil_stop: float = 800.0
 @export var speed: float
 @export var acc: float = 70.0
+@export var oriented: int = 1

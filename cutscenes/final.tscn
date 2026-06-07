@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://d3joeteoka1qe"]
+
+[ext_resource type="Texture2D" uid="uid://gx68rcixj73s" path="res://cutscenes/WhatsApp Image 2026-06-06 at 10.07.39 PM.jpeg" id="1_4cmnr"]
+[ext_resource type="Script" uid="uid://d1oybrd43o8dh" path="res://cutscenes/final.gd" id="1_6cqwn"]
+
+[node name="Final" type="Node2D" unique_id=1907437077]
+script = ExtResource("1_6cqwn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=901605230]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=961838881]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_4cmnr")

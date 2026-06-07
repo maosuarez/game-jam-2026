@@ -15,6 +15,7 @@ func _on_mode_changed(new_mode):
 		_enter_topdown()
 	else:
 		_enter_metroidvania()
+	Global.player = active_player
 
 func _enter_topdown():
 	zombies_player.global_position = dino_player.global_position

@@ -21,6 +21,8 @@ var max_hp: int
 # Cuando inicia lo agregamos al grupo de los enemigos.
 func _ready() -> void:
 	add_to_group("enemies")
+	add_to_group("topdown")
+	add_to_group("zombies")
 	collision_layer = 2 # El esta en la capa 2, para colisionar con el caracter principal
 	collision_mask = 1
 	max_hp = hp
@@ -28,10 +30,7 @@ func _ready() -> void:
 # Procesamiento de Fisica
 func _physics_process(delta: float) -> void:
 	_update_flash(delta)
-	if player == null:
-		player = _find_player()
-	if player == null:
-		return
+	player = Global.player
 	_ai_process(delta)
 
 ## Override in subclasses to implement movement/attack behaviour.
@@ -40,8 +39,7 @@ func _ai_process(_delta: float) -> void:
 
 # Busca el Player como objeto ara poder seguirlo
 func _find_player() -> CharacterBody2D:
-	var players := get_tree().get_nodes_in_group("player")
-	return players[0] if players.size() > 0 else null
+	return Global.player
 
 func _get_separation() -> Vector2:
 	var sep := Vector2.ZERO

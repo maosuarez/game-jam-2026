@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DinoStats" format=3 uid="uid://bmkbo0sofe1vt"]
+
+[ext_resource type="Script" uid="uid://dqjfqwtaiurxd" path="res://worlds/dino/resources/dinos/DinoStats.gd" id="1_8xkra"]
+
+[resource]
+resource_name = "Zombie"
+script = ExtResource("1_8xkra")
+texturePath = "res://worlds/zombie/assets/sprites/enemies/zombie_run_right.png"
+hp = 20.0
+base_damage = 1.0
+speed = 50.0
+oriented = -1
+metadata/_custom_type_script = "uid://dqjfqwtaiurxd"

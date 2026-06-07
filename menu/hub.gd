@@ -1,17 +1,18 @@
 extends Control
 
 const WORLD_SCENES = {
-	"FolderDino":   "res://worlds/dino/scenes/main.tscn",
-	"FolderZombie": "res://worlds/zombie/scenes/main.tscn",
+	"FolderDino":   "res://worlds/dino/scenes/dino_world.tscn",
+	"FolderZombie": "res://worlds/zombie/scenes/zombie_world.tscn",
 	"FolderPuzzle": "res://worlds/puzzle/scenes/main.tscn",
-	"FolderMix":    "res://worlds/mix/scenes/main.tscn",
+	"FolderMix":    "res://worlds/mix/scenes/mix_world.tscn",
 }
 
 var unlocked: Dictionary = {
 	"FolderDino":   true,
 	"FolderZombie": true,
-	"FolderPuzzle": true,
-	"FolderMix":    false,
+	"FolderPuzzle": false,
+	"FolderMix":    true,
+	"FolderSystem": false
 }
 
 @onready var clock: Label                 = $Taskbar/TaskbarRow/Clock
@@ -26,6 +27,7 @@ func _ready() -> void:
 	$Taskbar/TaskbarRow/StartBtn.pressed.connect(_on_start_pressed)
 	_apply_unlock_states()
 	character.play("idle")
+	AudioManager.streamPlayers["BGMusic"].stop()
 
 func _process(_delta: float) -> void:
 	clock.text = Time.get_time_string_from_system().substr(0, 5)
@@ -43,9 +45,13 @@ func _connect_folders() -> void:
 		folder.mouse_exited.connect(_on_folder_exit.bind(folder_name))
 
 func _apply_unlock_states() -> void:
-	var mix: Control = file_grid.get_node_or_null("FolderMix")
-	if mix:
-		mix.modulate = Color(0.4, 0.4, 0.4, 1.0)
+	for folder in file_grid.get_children():
+		if folder:
+			if !unlocked.get(folder.name): 
+				#print(folder.name)
+				folder.modulate = Color(0.4, 0.4, 0.4, 1.0)
+			else:
+				folder.modulate = Color(1.0, 1.0, 1.0, 1.0)
 
 func _on_folder_input(event: InputEvent, folder_name: String) -> void:
 	if event is InputEventMouseButton and event.pressed \
@@ -120,3 +126,7 @@ func _trigger_locked_glitch(folder_name: String) -> void:
 
 func _on_start_pressed() -> void:
 	pass
+
+
+func _on_close_btn_pressed() -> void:
+	get_tree().quit()

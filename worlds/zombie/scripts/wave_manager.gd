@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 		State.WAITING:
 			_delay_timer -= delta
 			if _delay_timer <= 0.0:
-				_start_boss()
+				_start_next_wave()
 		State.WAVE_ACTIVE:
 			_spawn_timer -= delta
 			if _spawn_timer <= 0.0:

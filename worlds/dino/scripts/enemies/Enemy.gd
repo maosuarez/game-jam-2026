@@ -33,6 +33,8 @@ func _ready() -> void:
 	acc = stats.acc
 	hurtbox.damage = base_damage
 	add_to_group("enemies")
+	add_to_group("metroidvania")
+	add_to_group("zombie") if stats.resource_name == "Zombie" else add_to_group("dino")
 	sprite.material = sprite.material.duplicate()
 	glitch.material = glitch.material.duplicate()
 	await get_tree().create_timer(0.1).timeout
@@ -90,7 +92,7 @@ func kill():
 
 func change_direction(instant: bool = true):
 	direction *= -1
-	sprite.flip_h = (direction == 1)
+	sprite.flip_h = (direction == stats.oriented)
 	ray_cast.position.x *= -1
 	ray_cast.target_position.x *= -1
 	if(instant): velocity.x = speed * direction

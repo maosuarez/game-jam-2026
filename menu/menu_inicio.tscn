@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://ccofnow4ncsy5"]
+
+[ext_resource type="Texture2D" uid="uid://byo5mqd3mfeew" path="res://menu/assets/ChatGPT_Image_Jun_7_2026_04_15_03_AM.png" id="1_f5in2"]
+[ext_resource type="Texture2D" uid="uid://baertt3o363et" path="res://menu/assets/image.png" id="2_5mng7"]
+[ext_resource type="Script" uid="uid://cg4bkpdmjxr12" path="res://menu/play_button.gd" id="3_5mng7"]
+
+[node name="Menu Inicio" type="Node2D" unique_id=1633344641]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1714529941]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=299670597]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_f5in2")
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/TextureRect" unique_id=566235028]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -221.0
+offset_top = -73.0
+offset_right = 221.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("2_5mng7")
+script = ExtResource("3_5mng7")
+metadata/_custom_type_script = "uid://bhpume7p5q6fy"
+
+[connection signal="pressed" from="CanvasLayer/TextureRect/TextureButton" to="CanvasLayer/TextureRect/TextureButton" method="_on_pressed"]

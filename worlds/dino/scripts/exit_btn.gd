@@ -2,4 +2,5 @@ extends CustomMenuButton
 
 func _on_pressed() -> void:
 	super()
-	get_tree().quit()
+	Engine.time_scale = 1.0
+	get_tree().change_scene_to_file("res://menu/hub.tscn")

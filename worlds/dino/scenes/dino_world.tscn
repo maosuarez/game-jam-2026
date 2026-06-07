@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c0g05s3bnnhon" path="res://worlds/dino/scenes/blue_dino.tscn" id="10_3wise"]
 [ext_resource type="Shader" uid="uid://cmisd32onyf0n" path="res://worlds/zombie/scenes/zombie_world.gdshader" id="11_xsq4h"]
 [ext_resource type="PackedScene" uid="uid://damrmktg2mu77" path="res://worlds/pause_menu.tscn" id="14_eaml5"]
+[ext_resource type="PackedScene" uid="uid://dqiso0u4w07k" path="res://worlds/dino/scenes/zombie.tscn" id="14_qfybh"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pvqou"]
 
@@ -218,7 +219,7 @@ z_index = 5
 recoil_force = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1069345479]
-position = Vector2(0, -47)
+position = Vector2(0, -25)
 zoom = Vector2(4.5, 4.5)
 limit_bottom = 110
 position_smoothing_enabled = true
@@ -323,6 +324,9 @@ position = Vector2(2481, -161)
 
 [node name="Green Dino3" parent="Entities" unique_id=1031729652 instance=ExtResource("6_qfybh")]
 position = Vector2(1884, -129)
+
+[node name="Zombie" parent="Entities" unique_id=1446546969 instance=ExtResource("14_qfybh")]
+position = Vector2(-107, 5)
 
 [node name="PauseMenu" parent="." unique_id=1620899816 instance=ExtResource("14_eaml5")]
 visible = false

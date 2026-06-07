@@ -1,5 +1,9 @@
 extends "res://worlds/zombie/scripts/base_zombie.gd"
 
+func _ready() -> void:
+	super()
+	add_to_group("zombie")
+
 func _ai_process(_delta: float) -> void:
 	var to_player := player.global_position - global_position
 	var dist := to_player.length()
