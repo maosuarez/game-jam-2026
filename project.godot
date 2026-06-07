@@ -11,22 +11,15 @@ config_version=5
 [application]
 
 config/name="GameJam2026"
-run/main_scene="uid://vwkoqam10bii"
+run/main_scene="uid://cydpng16d7boy"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/godot_mcp/plugin.cfg")
 
 [autoload]
 
 Global="*uid://cfcedwu0l1lbv"
 Ref="*uid://cij8qb3rnndlk"
 GameMode="*uid://bwenwpuv127cv"
-MCPScreenshot="*res://addons/godot_mcp/mcp_screenshot_service.gd"
-MCPInputService="*res://addons/godot_mcp/mcp_input_service.gd"
-MCPGameInspector="*res://addons/godot_mcp/mcp_game_inspector_service.gd"
 
 [editor_plugins]
 

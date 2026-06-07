@@ -112,4 +112,4 @@ func glitch():
 		new_obj.global_position = global_position
 		get_tree().current_scene.add_child(new_obj)
 	
-	queue_free()
+	call_deferred("queue_free")

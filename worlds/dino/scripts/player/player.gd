@@ -13,7 +13,6 @@ extends CharacterBody2D
 @onready var glitch_ray_spawn = $GlitchRaySpawn
 @onready var glitch_ray_scene: PackedScene = Ref.GlitchRayScene
 @onready var charge_bar = $PlayerUI/MarginContainer/ChargeBar
-@onready var camera = $Camera2D
 
 var recoil := Vector2.ZERO
 var isAttacking: bool = false

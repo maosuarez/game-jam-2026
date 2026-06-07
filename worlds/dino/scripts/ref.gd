@@ -5,7 +5,6 @@ var PlayerSheets = {
 	"normal": load("res://worlds/dino/assets/entities/player/player_sheet.png"),
 	"dino": load("res://worlds/dino/assets/entities/player/player_sheet_dino.png")
 }
-var GreenDinoSheet: Resource = load("res://worlds/dino/assets/entities/enemies/dino_run.png")
 
 ##Spawnable scenes
 var GlitchRayScene: PackedScene = load("res://worlds/dino/scenes/glitch_ray.tscn")

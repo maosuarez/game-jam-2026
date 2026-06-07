@@ -12,6 +12,7 @@ enum State { WAITING, SPAWNING, WAVE_ACTIVE, WAVE_COMPLETE, BOSS_PHASE, VICTORY,
 const ZOMBIE_BASIC_SCENE = preload("res://worlds/zombie/scenes/zombie_basic.tscn")
 const ZOMBIE_ELITE_SCENE = preload("res://worlds/zombie/scenes/zombie_elite.tscn")
 const BOSS_SCENE = preload("res://worlds/zombie/scenes/boss_cyclop.tscn")
+const PORTAL_SCENE = preload("res://worlds/zombie/scenes/portal.tscn")
 
 @export var arena_half_width: float = 400.0
 @export var arena_half_height: float = 280.0
@@ -19,7 +20,7 @@ const BOSS_SCENE = preload("res://worlds/zombie/scenes/boss_cyclop.tscn")
 ## Mínima distancia del jugador al borde del arena para bloquear ese lado de spawn.
 @export var edge_margin: float = 80.0
 
-var current_wave: int = 0
+@export var current_wave: int = 0
 var kills: int = 0
 var score: int = 0
 var kills_per_wave: Array[int] = [15, 25, 40]
@@ -134,6 +135,9 @@ func _start_boss() -> void:
 	boss_spawned.emit()
 
 func _on_boss_defeated() -> void:
+	var portal = PORTAL_SCENE.instantiate()
+	portal.global_position = Vector2(arena_half_width * 0.5, -arena_half_height * 0.5)
+	get_tree().current_scene.add_child(portal)
 	score += 200
 	score_changed.emit(score)
 	state = State.VICTORY

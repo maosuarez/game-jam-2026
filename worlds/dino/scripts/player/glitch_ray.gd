@@ -13,5 +13,5 @@ func _physics_process(delta):
 func _on_body_entered(body: Node2D):
 	if body.is_in_group("enemies"):
 		#print("Impact on ", body)
-		body.glitch()
+		body.call_deferred("glitch")
 		queue_free()

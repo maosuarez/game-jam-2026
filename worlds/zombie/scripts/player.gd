@@ -19,10 +19,14 @@ var speed_boost: bool = false
 var _boost_timers: Dictionary = {}
 var _damage_cooldown: float = 0.0
 
+var direction = Vector2.ZERO
+var last_direction = Vector2.ZERO
+
 @onready var shoot_point: Marker2D = $ShootPoint
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sprite: Sprite2D = $Sprite2D
 @onready var hitbox: Area2D = $HitBox
-@onready var camera = $Camera2D
+@onready var anim_tree = $Sprite2D/AnimationTree
+@onready var anim_player = $Sprite2D/AnimationPlayer
 
 func _ready() -> void:
 	hp = max_hp
@@ -54,7 +58,7 @@ func _deal_contact_damage(enemy: Node2D) -> void:
 	take_damage(dmg)
 
 func _handle_movement(_delta: float) -> void:
-	var direction := Vector2.ZERO
+	direction = Vector2.ZERO
 	if Input.is_action_pressed("move_left"):
 		direction.x -= 1
 	if Input.is_action_pressed("move_right"):
@@ -64,15 +68,13 @@ func _handle_movement(_delta: float) -> void:
 	if Input.is_action_pressed("move_down"):
 		direction.y += 1
 	direction = direction.normalized()
+	if(direction): last_direction = direction
 	var current_speed = speed * (1.5 if speed_boost else 1.0)
 	velocity = direction * current_speed
 	move_and_slide()
-
-	if direction != Vector2.ZERO:
-		sprite.flip_h = direction.x < 0
-		sprite.play("walk")
-	else:
-		sprite.play("idle")
+	
+	anim_tree.set("parameters/run/blend_position", last_direction)
+	anim_tree.set("parameters/idle/blend_position", last_direction)
 
 func _handle_shoot(delta: float) -> void:
 	shoot_timer -= delta
@@ -103,7 +105,6 @@ func take_damage(amount: int) -> void:
 	took_damage.emit(amount)
 	if hp <= 0:
 		died.emit()
-		queue_free()
 
 func heal(amount: int) -> void:
 	hp = min(hp + amount, max_hp)
@@ -136,3 +137,9 @@ func _update_boost_timers(delta: float) -> void:
 					double_shot = false
 				"damage_boost":
 					damage_boost = false
+
+
+func _on_died() -> void:
+	anim_player.play("death")
+	await anim_player.animation_finished
+	queue_free()
