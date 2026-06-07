@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://bbn0ekac6vm8x"]
+
+[ext_resource type="Script" uid="uid://dhdfewrk7fu33" path="res://ui/pause_menu.gd" id="1_50142"]
+[ext_resource type="Texture2D" uid="uid://55lfuhvuu3wo" path="res://ui/assets/player_sheet.webp" id="2_ejwgg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fob5h"]
+atlas = ExtResource("2_ejwgg")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avurv"]
+atlas = ExtResource("2_ejwgg")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npydk"]
+atlas = ExtResource("2_ejwgg")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ap7o"]
+atlas = ExtResource("2_ejwgg")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3kxr"]
+atlas = ExtResource("2_ejwgg")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vovkw"]
+atlas = ExtResource("2_ejwgg")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jyvtb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fob5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avurv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npydk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ap7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3kxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vovkw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=655001472]
+layer = 10
+script = ExtResource("1_50142")
+
+[node name="Overlay" type="ColorRect" parent="." unique_id=771536551]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.7)
+
+[node name="DialogBox" type="PanelContainer" parent="." unique_id=96722876]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+
+[node name="HBox" type="HBoxContainer" parent="DialogBox" unique_id=1997925297]
+layout_mode = 2
+
+[node name="CharacterPanel" type="PanelContainer" parent="DialogBox/HBox" unique_id=644767671]
+custom_minimum_size = Vector2(200, 260)
+layout_mode = 2
+
+[node name="CharacterSprite" type="AnimatedSprite2D" parent="DialogBox/HBox/CharacterPanel" unique_id=1839909226]
+position = Vector2(100, 130)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_jyvtb")
+animation = &"idle"
+frame_progress = 0.28909194
+
+[node name="MenuContent" type="VBoxContainer" parent="DialogBox/HBox" unique_id=1424027992]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="DialogBox/HBox/MenuContent" unique_id=1107064238]
+layout_mode = 2
+text = "[ PAUSA ]"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="DialogBox/HBox/MenuContent" unique_id=305096040]
+layout_mode = 2
+text = "► Continuar"
+
+[node name="SettingsButton" type="Button" parent="DialogBox/HBox/MenuContent" unique_id=1122724382]
+layout_mode = 2
+text = "⚙ Opciones"
+
+[node name="QuitButton" type="Button" parent="DialogBox/HBox/MenuContent" unique_id=707982316]
+layout_mode = 2
+text = "✕ Salir al Hub"
