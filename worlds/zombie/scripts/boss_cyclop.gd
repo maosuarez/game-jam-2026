@@ -3,7 +3,7 @@ extends "res://worlds/zombie/scripts/base_enemy.gd"
 signal phase_changed(phase: int)
 signal defeated
 
-const PROJECTILE_SCENE = preload("res://worlds/zombie/scenes/projectile.tscn")
+const PROJECTILE_SCENE = preload("res://worlds/zombie/scenes/boss_projectile.tscn")
 const ZOMBIE_BASIC_SCENE = preload("res://worlds/zombie/scenes/zombie_basic.tscn")
 
 ## Speed used once the boss enters phase 2. Base `speed` acts as phase-1 speed.
@@ -17,13 +17,15 @@ var _summon_timer: float = 0.0
 func _ready() -> void:
 	super._ready()
 	max_hp = hp
+	AudioManager.bg_play_music(2.1)
 
 func _ai_process(delta: float) -> void:
-	_check_phase_transition()
-	_handle_movement()
-	_handle_shooting(delta)
-	if phase == 2:
-		_handle_summon(delta)
+	if !player.isDead:
+		_check_phase_transition()
+		_handle_movement()
+		_handle_shooting(delta)
+		if phase == 2:
+			_handle_summon(delta)
 
 func _check_phase_transition() -> void:
 	if phase == 1 and hp * 2 <= max_hp:
@@ -36,6 +38,7 @@ func _check_phase_transition() -> void:
 func _handle_movement() -> void:
 	var dir := (player.global_position - global_position).normalized()
 	velocity = dir * speed
+	anim_tree.set("parameters/blend_position", dir)
 	move_and_slide()
 	if sprite:
 		sprite.flip_h = dir.x < 0
@@ -55,7 +58,7 @@ func _fire_at_player() -> void:
 		var proj := PROJECTILE_SCENE.instantiate()
 		proj.global_position = global_position
 		proj.direction = base_dir.rotated(angle_offset)
-		proj.damage = 2
+		proj.damage = damage
 		proj.speed = 280.0
 		proj.set_meta("enemy_projectile", true)
 		get_tree().current_scene.add_child(proj)
@@ -68,6 +71,7 @@ func _handle_summon(delta: float) -> void:
 			var angle := (TAU / 3.0) * i
 			var zombie := ZOMBIE_BASIC_SCENE.instantiate()
 			zombie.global_position = global_position + Vector2(cos(angle), sin(angle)) * 90.0
+			zombie.add_to_group("zombies")
 			get_tree().current_scene.add_child(zombie)
 
 func _update_flash(delta: float) -> void:

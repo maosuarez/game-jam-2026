@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var damage: int = 1
 @export var xp_value: int = 10
 @export var separation_radius: float = 40.0
-@export var hit_flash_color: Color = Color(2.5, 0.3, 0.3)
+@export var hit_flash_color: Color = Color(2.5, 2.5, 2.5, 1.0)
 @export var hit_flash_duration: float = 0.15
 
 # Cargar el Jugador 
@@ -14,7 +14,8 @@ var player: CharacterBody2D = null
 var _flash_timer: float = 0.0
 
 # Sprite Base
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var anim_tree = $Sprite2D/AnimationTree
 
 # Cuando inicia lo agregamos al grupo de los enemigos.
 func _ready() -> void:

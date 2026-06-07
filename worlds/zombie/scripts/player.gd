@@ -4,7 +4,7 @@ signal died
 signal hp_changed(new_hp)
 signal took_damage(amount)
 
-const PROJECTILE_SCENE = preload("res://worlds/zombie/scenes/projectile.tscn")
+const PROJECTILE_SCENE = preload("res://worlds/zombie/scenes/player_projectile.tscn")
 
 @export var speed: float = 200.0
 @export var max_hp: int = 5
@@ -19,10 +19,11 @@ var speed_boost: bool = false
 var _boost_timers: Dictionary = {}
 var _damage_cooldown: float = 0.0
 
+var isDead = false
 var direction = Vector2.ZERO
 var last_direction = Vector2.ZERO
 
-@onready var shoot_point: Marker2D = $ShootPoint
+@onready var shoot_point: Marker2D = $GunPivot/ShootPoint
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var hitbox: Area2D = $HitBox
 @onready var anim_tree = $Sprite2D/AnimationTree
@@ -35,15 +36,17 @@ func _ready() -> void:
 	hitbox.body_entered.connect(_on_hitbox_body_entered)
 
 func _physics_process(delta: float) -> void:
-	_damage_cooldown = max(0.0, _damage_cooldown - delta)
-	if _damage_cooldown <= 0.0:
-		_check_overlapping_enemies()
-	_handle_movement(delta)
-	_handle_shoot(delta)
-	_update_boost_timers(delta)
+	if !isDead:
+		_damage_cooldown = max(0.0, _damage_cooldown - delta)
+		if _damage_cooldown <= 0.0:
+			_check_overlapping_enemies()
+		_handle_movement(delta)
+		_handle_shoot(delta)
+		_update_boost_timers(delta)
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies") and _damage_cooldown <= 0.0:
+		if(body.is_in_group("zombies")): body.call_deferred("queue_free")
 		_deal_contact_damage(body)
 
 func _check_overlapping_enemies() -> void:
@@ -140,6 +143,6 @@ func _update_boost_timers(delta: float) -> void:
 
 
 func _on_died() -> void:
-	anim_player.play("death")
-	await anim_player.animation_finished
-	queue_free()
+	isDead = true
+	get_parent().wave_manager.clear_remaining_zombies()
+	anim_tree.get("parameters/playback").start("death")

@@ -23,7 +23,8 @@ const PORTAL_SCENE = preload("res://worlds/zombie/scenes/portal.tscn")
 @export var current_wave: int = 0
 var kills: int = 0
 var score: int = 0
-var kills_per_wave: Array[int] = [15, 25, 40]
+#var kills_per_wave: Array[int] = [15, 25, 40]
+var kills_per_wave: Array[int] = [1, 1, 1]
 var total_waves: int = 3
 var state: State = State.WAITING
 var _spawn_timer: float = 0.0
@@ -72,6 +73,7 @@ func _spawn_zombie() -> void:
 	var zombie = scene.instantiate()
 	zombie.global_position = pos
 	zombie.died.connect(_on_zombie_died)
+	zombie.add_to_group("zombies")
 	get_tree().current_scene.add_child(zombie)
 
 func _get_spawn_position() -> Vector2:
@@ -121,6 +123,11 @@ func _on_zombie_died(zombie) -> void:
 		state = State.WAVE_COMPLETE
 		_delay_timer = _wave_start_delay
 		wave_completed.emit(current_wave)
+		clear_remaining_zombies()
+
+func clear_remaining_zombies() -> void:
+	for zombie in get_tree().get_nodes_in_group("zombies"):
+		zombie.call_deferred("queue_free")
 
 func deduct_score(amount: int) -> void:
 	score = max(0, score - amount * 50)
@@ -135,6 +142,7 @@ func _start_boss() -> void:
 	boss_spawned.emit()
 
 func _on_boss_defeated() -> void:
+	clear_remaining_zombies()
 	var portal = PORTAL_SCENE.instantiate()
 	portal.global_position = Vector2(arena_half_width * 0.5, -arena_half_height * 0.5)
 	get_tree().current_scene.add_child(portal)

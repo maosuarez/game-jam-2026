@@ -6,7 +6,7 @@
 script = ExtResource("1_ko7nw")
 texturePath = "res://worlds/dino/assets/entities/enemies/red_dino_run.png"
 hp = 30.0
-base_damage = 20.0
+base_damage = 2.0
 recoil_stop = 900.0
 speed = 120.0
 acc = 100.0

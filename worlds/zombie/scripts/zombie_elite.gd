@@ -27,6 +27,7 @@ func _do_chase(_delta: float) -> void:
 
 	var move_dir := (dir + _get_separation() * 0.35).normalized()
 	velocity = move_dir * speed
+	anim_tree.set("parameters/blend_position", dir)
 	move_and_slide()
 
 	if _charge_timer <= 0.0 and dist < 250.0:

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bo30xl0f0fxsa"]
+
+[ext_resource type="Script" uid="uid://hossg3iqobxs" path="res://worlds/zombie/scripts/boss_projectile.gd" id="1_jpuwp"]
+[ext_resource type="Texture2D" uid="uid://biuyeo1absmip" path="res://worlds/zombie/assets/sprites/items/Kunai.png" id="2_wvu8y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j8ws0"]
+radius = 5.0
+
+[node name="Boss Projectile" type="Area2D" unique_id=1675843724]
+script = ExtResource("1_jpuwp")
+speed = 500.0
+damage = 2
+metadata/_custom_type_script = "uid://clbosxxy2sm63"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2011081792]
+shape = SubResource("CircleShape2D_j8ws0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1980273077]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_wvu8y")

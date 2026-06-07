@@ -17,9 +17,11 @@ func _physics_process(delta: float):
 	if(Global.player.isDead): movement = 0
 	if movement < 0:
 		player.attackbox.position.x = -37
+		player.attack_anim.flip_h = true
 		sprite.flip_h = true
 	elif movement > 0:
 		player.attackbox.position.x = 0
+		player.attack_anim.flip_h = false
 		sprite.flip_h = false
 
 func hit_flash(times := 3):

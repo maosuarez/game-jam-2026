@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://csj2hrjb76g4k"]
+
+[ext_resource type="Script" uid="uid://clbosxxy2sm63" path="res://worlds/zombie/scripts/projectile.gd" id="1_2nu65"]
+[ext_resource type="Texture2D" uid="uid://cp62a7md1bya0" path="res://worlds/zombie/assets/sprites/player/Bala.png" id="2_wyjic"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j8ws0"]
+radius = 5.0
+
+[node name="Player Projectile" type="Area2D" unique_id=262204863]
+script = ExtResource("1_2nu65")
+metadata/_custom_type_script = "uid://clbosxxy2sm63"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2011081792]
+shape = SubResource("CircleShape2D_j8ws0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1980273077]
+texture = ExtResource("2_wyjic")
+region_enabled = true
+region_rect = Rect2(9, 9, 8, 8)

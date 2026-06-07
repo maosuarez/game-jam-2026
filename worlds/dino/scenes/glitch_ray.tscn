@@ -1,15 +1,78 @@
 [gd_scene format=3 uid="uid://dn76lsq8qj04x"]
 
 [ext_resource type="Script" uid="uid://bft7hbd77e00k" path="res://worlds/dino/scripts/player/glitch_ray.gd" id="1_tflp3"]
+[ext_resource type="Texture2D" uid="uid://dmrrewqd7a1oo" path="res://worlds/dino/assets/entities/player/GlitchShot.png" id="2_lxs6s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7f76"]
+atlas = ExtResource("2_lxs6s")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vm6ls"]
+atlas = ExtResource("2_lxs6s")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mad50"]
+atlas = ExtResource("2_lxs6s")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5aaym"]
+atlas = ExtResource("2_lxs6s")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vyinu"]
+atlas = ExtResource("2_lxs6s")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlffg"]
+atlas = ExtResource("2_lxs6s")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymp2d"]
+atlas = ExtResource("2_lxs6s")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yithm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7f76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vm6ls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mad50")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5aaym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vyinu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlffg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymp2d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lxs6s"]
-radius = 4.0
+radius = 5.0
 height = 28.0
 
 [node name="Glitch Ray" type="Area2D" unique_id=1519877966]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 5
 script = ExtResource("1_tflp3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=342361073]
+position = Vector2(0, 1)
+sprite_frames = SubResource("SpriteFrames_yithm")
+frame_progress = 0.47050416
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1421917804]
 rotation = 1.5707964

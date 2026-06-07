@@ -1,4 +1,7 @@
+class_name Projectile
 extends Area2D
+
+@onready var sprite = $Sprite2D
 
 @export var speed: float = 400.0
 @export var damage: int = 1

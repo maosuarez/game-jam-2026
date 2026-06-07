@@ -5,6 +5,7 @@ extends CharacterBody2D
 
 @onready var ray_cast: RayCast2D = $RayCast
 @onready var sprite: Sprite2D = $Sprite
+@onready var glitch = $Glitch
 @onready var hurtbox: HurtZone = $HurtZone
 @onready var heal_scene = Ref.HealScene
 @onready var rand_obj_scene = Ref.RandObjectScene
@@ -33,6 +34,7 @@ func _ready() -> void:
 	hurtbox.damage = base_damage
 	add_to_group("enemies")
 	sprite.material = sprite.material.duplicate()
+	glitch.material = glitch.material.duplicate()
 	await get_tree().create_timer(0.1).timeout
 	canTurn = true
 
@@ -100,7 +102,14 @@ func apply_recoil(direction: Vector2, force: float):
 	velocity.x = 0.0
 	recoil = direction * force
 
-func glitch():
+func do_glitch():
+	velocity = Vector2.ZERO
+	isDead = true
+	hurtbox.monitoring = false
+	glitch.visible = true
+	glitch.material.set_shader_parameter("glitch_intensity", 0.7)
+	await get_tree().create_timer(randf_range(0.2, 0.5)).timeout
+	
 	var rand = randf()
 	
 	if rand < 0.5:

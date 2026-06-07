@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+signal hp_changed(new_hp)
+
 @onready var coyote_time: Timer = $PlayerMovement/CoyoteTime
 @onready var jump_buffer: Timer = $PlayerMovement/JumpBuffer
 @onready var kb_timer: Timer = $PlayerMovement/KBTimer
@@ -10,6 +12,7 @@ extends CharacterBody2D
 @onready var movement_component = $PlayerMovement
 @onready var animation_component = $PlayerAnimation
 @onready var attackbox = $AttackBox
+@onready var attack_anim = $AttackBox/CollisionShape2D/AnimatedSprite2D
 @onready var glitch_ray_spawn = $GlitchRaySpawn
 @onready var glitch_ray_scene: PackedScene = Ref.GlitchRayScene
 @onready var charge_bar = $PlayerUI/MarginContainer/ChargeBar
@@ -20,19 +23,20 @@ var isHurt: bool = false
 var isDead: bool = false
 var kb_dir: int
 
-@export var hp: float
-@export var max_hp: float
-@export var base_damage: float
+@export var hp: int
+@export var max_hp: int
+@export var base_damage: int
 @export var self_recoil_force: float
 @export var recoil_force: float
 @export var recoil_stop: float
 
 func _ready():
 	Global.player = self
-	hp = max_hp
 	animation_component.sprite.texture = Ref.PlayerSheets["dino"]
 	charge_bar.max_value = charge_timer.wait_time
 	add_to_group("player")
+	hp = max_hp
+	hp_changed.emit(hp)
 
 func _process(delta: float):
 	movement_component._process(delta)
@@ -44,6 +48,8 @@ func _process(delta: float):
 	if Input.is_action_just_pressed("attack") && attack_timer.is_stopped():
 		attackbox.monitoring = true
 		attackbox.visible = true
+		attack_anim.stop()
+		attack_anim.play("default")
 		attack_timer.start()
 	if Input.is_action_just_pressed("glitch_ray"):
 		charge_timer.start()
@@ -80,23 +86,27 @@ func shoot_glitch_ray():
 		await get_tree().create_timer(randf_range(0.02, 0.15)).timeout
 		animation_component.sprite.texture = Ref.PlayerSheets["dino"]
 
-func hurt(damage: float):
+func hurt(damage: int):
 	isHurt = true
 	hp -= damage;
-	print("HP: ", hp)
+	#print("HP: ", hp)
 	if(hp <= 0.0):
 		kill()
 	else:
 		animation_component.hit_flash()
+	hp_changed.emit(hp)
 
-func heal(healing: float):
+func heal(healing: int):
 	hp += healing;
+	hp_changed.emit(hp)
 	if(hp > max_hp):
 		hp = max_hp
-	print("HP: ", hp)
+	#print("HP: ", hp)
 
 func kill():
+	collision_layer = 0
 	isDead = true
+	animation_component.animation_player.play("idle")
 	Engine.time_scale = 0.5
 	death_timer.start()
 
@@ -105,7 +115,7 @@ func apply_recoil(direction: Vector2, force: float):
 
 func _on_death_timer_timeout() -> void:
 	Engine.time_scale = 1.0
-	get_tree().change_scene_to_file("res://worlds/dino/scenes/game.tscn")
+	get_tree().reload_current_scene()
 
 func _on_attack_timer_timeout() -> void:
 	attackbox.monitoring = false

@@ -20,6 +20,12 @@ config/icon="res://icon.svg"
 Global="*uid://cfcedwu0l1lbv"
 Ref="*uid://cij8qb3rnndlk"
 GameMode="*uid://bwenwpuv127cv"
+AudioManager="*uid://d2ny1qxnenv2b"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [editor_plugins]
 

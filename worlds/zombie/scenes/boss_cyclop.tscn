@@ -1,68 +1,171 @@
 [gd_scene format=3 uid="uid://h5n5r6hrl1n"]
 
 [ext_resource type="Script" uid="uid://1byvpbeaxc1i" path="res://worlds/zombie/scripts/boss_cyclop.gd" id="1_cmo0e"]
-[ext_resource type="Texture2D" uid="uid://bdauqgyw7ps4y" path="res://worlds/zombie/assets/sprites/enemies/skull/SpriteSheet.png" id="2_um6un"]
+[ext_resource type="Texture2D" uid="uid://caq2t6o7ssr8g" path="res://worlds/zombie/assets/sprites/boss/boss_sheet.png" id="2_um6un"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uymul"]
-radius = 22.0
-height = 50.0
+radius = 7.5
+height = 25.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bejx4"]
-atlas = ExtResource("2_um6un")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="Animation" id="Animation_uymul"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ugf8g"]
-atlas = ExtResource("2_um6un")
-region = Rect2(32, 0, 16, 16)
+[sub_resource type="Animation" id="Animation_bejx4"]
+resource_name = "run_down"
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hjyaa"]
-atlas = ExtResource("2_um6un")
-region = Rect2(32, 16, 16, 16)
+[sub_resource type="Animation" id="Animation_ugf8g"]
+resource_name = "run_left"
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13, 14, 15]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7dfk7"]
-atlas = ExtResource("2_um6un")
-region = Rect2(32, 32, 16, 16)
+[sub_resource type="Animation" id="Animation_hjyaa"]
+resource_name = "run_right"
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13, 14, 15]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wtd2v"]
-atlas = ExtResource("2_um6un")
-region = Rect2(32, 48, 16, 16)
+[sub_resource type="Animation" id="Animation_7dfk7"]
+resource_name = "run_up"
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 19, 20, 21, 22, 23]
+}
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_s16hy"]
-animations = [{
-"frames": [],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bejx4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ugf8g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hjyaa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7dfk7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wtd2v")
-}],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
-}]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wtd2v"]
+_data = {
+&"RESET": SubResource("Animation_uymul"),
+&"run_down": SubResource("Animation_bejx4"),
+&"run_left": SubResource("Animation_ugf8g"),
+&"run_right": SubResource("Animation_hjyaa"),
+&"run_up": SubResource("Animation_7dfk7")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s16hy"]
+animation = &"run_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_16w03"]
+animation = &"run_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vt16g"]
+animation = &"run_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_icdls"]
+animation = &"run_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_x1sjj"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_s16hy")
+blend_point_0/pos = Vector2(0, -1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_16w03")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_vt16g")
+blend_point_2/pos = Vector2(-1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_icdls")
+blend_point_3/pos = Vector2(1, 0)
+blend_mode = 1
 
 [node name="BossCyclop" type="CharacterBody2D" unique_id=1310302431]
 script = ExtResource("1_cmo0e")
+hp = 20
+damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1937038901]
+scale = Vector2(2, 2)
 shape = SubResource("CapsuleShape2D_uymul")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=275758747]
-sprite_frames = SubResource("SpriteFrames_s16hy")
-animation = &"new_animation"
-frame = 4
-frame_progress = 0.5587171
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1318234580]
+scale = Vector2(2, 2)
+texture = ExtResource("2_um6un")
+hframes = 8
+vframes = 3
+frame = 16
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=1510106999]
+libraries/ = SubResource("AnimationLibrary_wtd2v")
+
+[node name="AnimationTree" type="AnimationTree" parent="Sprite2D" unique_id=1381267958]
+tree_root = SubResource("AnimationNodeBlendSpace2D_x1sjj")
+anim_player = NodePath("../AnimationPlayer")
+parameters/blend_position = Vector2(0, 0)

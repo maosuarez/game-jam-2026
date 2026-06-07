@@ -14,6 +14,7 @@ func _ready() -> void:
 	player.died.connect(_on_player_died)
 	Global.player = player
 	glitch.material.set_shader_parameter("glitch_intensity", 0.0)
+	AudioManager.bg_play_music(2)
 
 func _on_all_completed() -> void:
 	glitch_trigger.activate()
@@ -23,7 +24,7 @@ func _on_level_completed() -> void:
 
 func _on_player_died() -> void:
 	wave_manager.stop()
-	get_tree().create_timer(3.0).timeout.connect(get_tree().reload_current_scene)
+	#get_tree().create_timer(3.0).timeout.connect(get_tree().reload_current_scene)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_R:

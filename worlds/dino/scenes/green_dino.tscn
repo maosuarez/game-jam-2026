@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://duxyutgksgjgq" path="res://worlds/dino/scenes/hurtzone.tscn" id="3_0bjbq"]
 [ext_resource type="Texture2D" uid="uid://5fhof8iycn60" path="res://worlds/dino/assets/entities/enemies/green_dino_run.png" id="3_5xag0"]
 [ext_resource type="Shader" uid="uid://dvjkgft7b8ft2" path="res://worlds/dino/scenes/hit_shader.gdshader" id="3_ofr6i"]
+[ext_resource type="Shader" uid="uid://cmisd32onyf0n" path="res://worlds/zombie/scenes/zombie_world.gdshader" id="6_4ecqw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5xag0"]
 size = Vector2(19, 15)
@@ -56,6 +57,11 @@ _data = {
 &"run": SubResource("Animation_4ecqw")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hu5vw"]
+shader = ExtResource("6_4ecqw")
+shader_parameter/glitch_intensity = 0.0
+shader_parameter/glitch_speed = 5.0
+
 [node name="Green Dino" type="CharacterBody2D" unique_id=1031729652]
 collision_layer = 4
 script = ExtResource("1_5xag0")
@@ -85,3 +91,18 @@ hframes = 8
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite" unique_id=723927961]
 libraries/ = SubResource("AnimationLibrary_hu5vw")
 autoplay = &"run"
+
+[node name="Glitch" type="ColorRect" parent="." unique_id=119000013]
+visible = false
+material = SubResource("ShaderMaterial_hu5vw")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -4.0
+offset_right = 11.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2

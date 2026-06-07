@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://duxyutgksgjgq" path="res://worlds/dino/scenes/hurtzone.tscn" id="2_ufhlb"]
 [ext_resource type="Shader" uid="uid://dvjkgft7b8ft2" path="res://worlds/dino/scenes/hit_shader.gdshader" id="3_fuiev"]
 [ext_resource type="Texture2D" uid="uid://cx7d8ww1vdts1" path="res://worlds/dino/assets/entities/enemies/blue_dino_run.png" id="5_fuiev"]
+[ext_resource type="Shader" uid="uid://cmisd32onyf0n" path="res://worlds/zombie/scenes/zombie_world.gdshader" id="6_7c1i4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7c1i4"]
 size = Vector2(19, 15)
@@ -59,6 +60,11 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_fuiev"]
 radius = 154.05194
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7c1i4"]
+shader = ExtResource("6_7c1i4")
+shader_parameter/glitch_intensity = 0.0
+shader_parameter/glitch_speed = 5.0
+
 [node name="Blue Dino" type="CharacterBody2D" unique_id=1144803135]
 collision_layer = 4
 script = ExtResource("1_ufhlb")
@@ -98,6 +104,21 @@ shape = SubResource("CircleShape2D_fuiev")
 [node name="FloorDetect" type="RayCast2D" parent="." unique_id=399671057]
 position = Vector2(10, 0)
 target_position = Vector2(5, 650)
+
+[node name="Glitch" type="ColorRect" parent="." unique_id=771489130]
+visible = false
+material = SubResource("ShaderMaterial_7c1i4")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -4.0
+offset_right = 11.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
 [connection signal="body_exited" from="DetectionRange" to="." method="_on_detection_range_body_exited"]

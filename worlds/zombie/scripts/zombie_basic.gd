@@ -7,6 +7,7 @@ func _ai_process(_delta: float) -> void:
 
 	var move_dir := (dir + _get_separation() * 0.4).normalized()
 	velocity = move_dir * speed
+	anim_tree.set("parameters/blend_position", dir)
 	move_and_slide()
 
 	if sprite:

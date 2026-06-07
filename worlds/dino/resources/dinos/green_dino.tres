@@ -6,6 +6,6 @@
 script = ExtResource("1_iteoj")
 texturePath = "res://worlds/dino/assets/entities/enemies/green_dino_run.png"
 hp = 20.0
-base_damage = 10.0
+base_damage = 1.0
 speed = 60.0
 metadata/_custom_type_script = "uid://dqjfqwtaiurxd"

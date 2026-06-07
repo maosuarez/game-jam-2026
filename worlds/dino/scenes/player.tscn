@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://r2pk3khf7vyv" path="res://worlds/dino/scripts/player/playerStates/walk.gd" id="10_hnln2"]
 [ext_resource type="Script" uid="uid://dptvsnbot4lnd" path="res://worlds/dino/scripts/player/playerStates/hit.gd" id="12_8utgh"]
 [ext_resource type="Script" uid="uid://cr5w6ck6jkq3w" path="res://worlds/dino/scripts/player/attack_box.gd" id="13_2177k"]
+[ext_resource type="Texture2D" uid="uid://ddggex0c2wste" path="res://worlds/dino/assets/entities/player/Golpe.png" id="15_vocgo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vocgo"]
 shader = ExtResource("3_1hn7a")
@@ -197,11 +198,54 @@ height = 32.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8utgh"]
 size = Vector2(25, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ulns"]
+atlas = ExtResource("15_vocgo")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imef7"]
+atlas = ExtResource("15_vocgo")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxq0f"]
+atlas = ExtResource("15_vocgo")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2i8je"]
+atlas = ExtResource("15_vocgo")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82axh"]
+atlas = ExtResource("15_vocgo")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pw7bq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ulns")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imef7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxq0f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2i8je")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82axh")
+}],
+"loop": false,
+"name": &"default",
+"speed": 50.0
+}]
+
 [node name="Player" type="CharacterBody2D" unique_id=21042635]
 collision_layer = 2
 script = ExtResource("1_f02sa")
-max_hp = 100.0
-base_damage = 10.0
+max_hp = 5
+base_damage = 10
 self_recoil_force = 100.0
 recoil_force = 300.0
 recoil_stop = 700.0
@@ -279,7 +323,11 @@ position = Vector2(18.5, 0)
 shape = SubResource("RectangleShape2D_8utgh")
 debug_color = Color(0.9137255, 0, 0, 0.35686275)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AttackBox" unique_id=1982694028]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AttackBox/CollisionShape2D" unique_id=1982694028]
+position = Vector2(-0.5, -1)
+sprite_frames = SubResource("SpriteFrames_pw7bq")
+frame = 4
+frame_progress = 1.0
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=204711032]
 wait_time = 0.1
