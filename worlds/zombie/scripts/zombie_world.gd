@@ -5,6 +5,7 @@ extends Node2D
 @onready var glitch_trigger: Area2D = $GlitchTrigger
 @onready var player: CharacterBody2D = $Player
 @onready var glitch = $CanvasLayer/Glitch
+@onready var boss_alert = $BossAlert
 
 func _ready() -> void:
 	wave_manager.all_completed.connect(_on_all_completed)
@@ -13,10 +14,12 @@ func _ready() -> void:
 	player.took_damage.connect(wave_manager.deduct_score)
 	player.died.connect(_on_player_died)
 	Global.player = player
+	Global.level = self
 	glitch.material.set_shader_parameter("glitch_intensity", 0.0)
-	AudioManager.bg_play_music(2)
+	AudioManager.streamPlayers["BGMusic"].stop()
 
 func _on_all_completed() -> void:
+	hud.layer = 1
 	glitch_trigger.activate()
 
 func _on_level_completed() -> void:

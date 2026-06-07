@@ -12,6 +12,7 @@ extends CharacterBody2D
 # Cargar el Jugador 
 var player: CharacterBody2D = null
 var _flash_timer: float = 0.0
+var max_hp: int
 
 # Sprite Base
 @onready var sprite: Sprite2D = $Sprite2D
@@ -21,7 +22,8 @@ var _flash_timer: float = 0.0
 func _ready() -> void:
 	add_to_group("enemies")
 	collision_layer = 2 # El esta en la capa 2, para colisionar con el caracter principal
-	collision_mask = 0 # Escucha las colisiones en la capa 0
+	collision_mask = 1
+	max_hp = hp
 
 # Procesamiento de Fisica
 func _physics_process(delta: float) -> void:

@@ -6,7 +6,8 @@ var active_player: CharacterBody2D
 
 func _ready() -> void:
 	active_player = players.active_player
-	AudioManager.bg_play_music(3)
+	AudioManager.bg_play_music(3.0)
+	Global.level = self
 
 func _process(delta: float) -> void:
 	pass

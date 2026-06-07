@@ -115,10 +115,10 @@ func do_glitch():
 	if rand < 0.5:
 		var new_heal = heal_scene.instantiate()
 		new_heal.global_position = global_position
-		get_tree().current_scene.add_child(new_heal)
+		get_tree().current_scene.entities.add_child(new_heal)
 	else:
 		var new_obj = rand_obj_scene.instantiate()
 		new_obj.global_position = global_position
-		get_tree().current_scene.add_child(new_obj)
+		get_tree().current_scene.entities.add_child(new_obj)
 	
 	call_deferred("queue_free")

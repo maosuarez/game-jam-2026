@@ -10,6 +10,7 @@ const PROJECTILE_SCENE = preload("res://worlds/zombie/scenes/player_projectile.t
 @export var max_hp: int = 5
 @export var shoot_cooldown: float = 0.3
 @export var damage: int = 1
+@export var hit_flash_color: Color = Color(2.5, 2.5, 2.5, 1.0)
 
 var hp: int
 var shoot_timer: float = 0.0
@@ -108,6 +109,8 @@ func take_damage(amount: int) -> void:
 	took_damage.emit(amount)
 	if hp <= 0:
 		died.emit()
+	else:
+		hit_flash()
 
 func heal(amount: int) -> void:
 	hp = min(hp + amount, max_hp)
@@ -141,8 +144,14 @@ func _update_boost_timers(delta: float) -> void:
 				"damage_boost":
 					damage_boost = false
 
+func hit_flash(times := 3):
+	for i in times:
+		sprite.modulate = hit_flash_color
+		await get_tree().create_timer(0.8 / (2*times)).timeout
+		sprite.modulate = Color(1, 1, 1, 1)
+		await get_tree().create_timer(0.8 / (2*times)).timeout
 
 func _on_died() -> void:
 	isDead = true
-	get_parent().wave_manager.clear_remaining_zombies()
+	if Global.level.wave_manager: Global.level.wave_manager.clear_remaining_zombies()
 	anim_tree.get("parameters/playback").start("death")

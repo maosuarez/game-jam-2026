@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://damrmktg2mu77"]
+
+[ext_resource type="Script" uid="uid://cb3isg5bciqb" path="res://worlds/pause_menu.gd" id="1_2dplo"]
+[ext_resource type="Texture2D" uid="uid://epajf1erox0g" path="res://worlds/dino/assets/CajaMenuPausa.png" id="2_qyou5"]
+[ext_resource type="Texture2D" uid="uid://bep17efoa6v5w" path="res://worlds/dino/assets/PAUSADO.png" id="3_iaiqc"]
+[ext_resource type="Texture2D" uid="uid://0ct33mjs5u0" path="res://worlds/dino/assets/Continuar.png" id="4_ux57c"]
+[ext_resource type="Script" uid="uid://dw280ofevyoi5" path="res://worlds/dino/scripts/continue_btn.gd" id="5_auouu"]
+[ext_resource type="Texture2D" uid="uid://gnykr2d1i6es" path="res://worlds/dino/assets/Reiniciar.png" id="6_2dplo"]
+[ext_resource type="Script" uid="uid://dc0iagisjw8vl" path="res://worlds/dino/scripts/restart_btn.gd" id="7_0yq5s"]
+[ext_resource type="Texture2D" uid="uid://bwkxiog55516k" path="res://worlds/dino/assets/ButtonSalir.png" id="8_m8eji"]
+[ext_resource type="Script" uid="uid://bc7rdvx42td2d" path="res://worlds/dino/scripts/exit_btn.gd" id="9_kj6wm"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0rd3c"]
+texture = ExtResource("2_qyou5")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1620899816]
+script = ExtResource("1_2dplo")
+
+[node name="Control" type="Control" parent="." unique_id=1200845050]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=774634705]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.54901963)
+
+[node name="Fondo" type="PanelContainer" parent="Control" unique_id=1530508555]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -61.0
+offset_right = 62.0
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+pivot_offset = Vector2(62, 61)
+theme_override_styles/panel = SubResource("StyleBoxTexture_0rd3c")
+
+[node name="General" type="VBoxContainer" parent="Control/Fondo" unique_id=1914807983]
+layout_mode = 2
+alignment = 1
+
+[node name="Pausado" type="TextureRect" parent="Control/Fondo/General" unique_id=2044974647]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_iaiqc")
+
+[node name="ContinueBtn" type="TextureButton" parent="Control/Fondo/General" unique_id=1891476570]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("4_ux57c")
+script = ExtResource("5_auouu")
+
+[node name="RestartBtn" type="TextureButton" parent="Control/Fondo/General" unique_id=1139832783]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("6_2dplo")
+script = ExtResource("7_0yq5s")
+
+[node name="ExitBtn" type="TextureButton" parent="Control/Fondo/General" unique_id=679375711]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+action_mode = 0
+texture_normal = ExtResource("8_m8eji")
+script = ExtResource("9_kj6wm")

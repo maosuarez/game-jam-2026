@@ -1,7 +1,7 @@
 extends "res://worlds/zombie/scripts/base_enemy.gd"
 
 signal phase_changed(phase: int)
-signal defeated
+signal defeated(pos: Vector2)
 
 const PROJECTILE_SCENE = preload("res://worlds/zombie/scenes/boss_projectile.tscn")
 const ZOMBIE_BASIC_SCENE = preload("res://worlds/zombie/scenes/zombie_basic.tscn")
@@ -9,17 +9,19 @@ const ZOMBIE_BASIC_SCENE = preload("res://worlds/zombie/scenes/zombie_basic.tscn
 ## Speed used once the boss enters phase 2. Base `speed` acts as phase-1 speed.
 @export var speed_phase2: float = 90.0
 
-var max_hp: int
+var phase_hp: float
 var phase: int = 1
 var _shoot_timer: float = 0.0
 var _summon_timer: float = 0.0
 
 func _ready() -> void:
 	super._ready()
-	max_hp = hp
+	phase_hp = (hp * 2)/3
 	AudioManager.bg_play_music(2.1)
+	Global.level.wave_manager.kills_updated.emit(hp, max_hp)
 
 func _ai_process(delta: float) -> void:
+	print(hp, phase)
 	if !player.isDead:
 		_check_phase_transition()
 		_handle_movement()
@@ -28,7 +30,7 @@ func _ai_process(delta: float) -> void:
 			_handle_summon(delta)
 
 func _check_phase_transition() -> void:
-	if phase == 1 and hp * 2 <= max_hp:
+	if phase == 1 and hp <= phase_hp:
 		phase = 2
 		speed = speed_phase2
 		phase_changed.emit(phase)
@@ -61,6 +63,7 @@ func _fire_at_player() -> void:
 		proj.damage = damage
 		proj.speed = 280.0
 		proj.set_meta("enemy_projectile", true)
+		proj.add_to_group("enemy_projectile")
 		get_tree().current_scene.add_child(proj)
 
 func _handle_summon(delta: float) -> void:
@@ -79,6 +82,10 @@ func _update_flash(delta: float) -> void:
 	if _flash_timer <= 0.0 and sprite:
 		sprite.modulate = Color(1.8, 0.3, 0.3) if phase == 2 else Color.WHITE
 
+func take_damage(amount: int) -> void:
+	super(amount)
+	Global.level.wave_manager.kills_updated.emit(hp, max_hp)
+
 func _on_death() -> void:
-	defeated.emit()
+	defeated.emit(global_position)
 	queue_free()

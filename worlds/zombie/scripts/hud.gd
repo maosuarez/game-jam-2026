@@ -1,8 +1,8 @@
 extends CanvasLayer
 
-@onready var kills_bar: ProgressBar = $KillsBar
-@onready var wave_label: Label = $WaveLabel
-@onready var hp_container: HBoxContainer = $HPContainer
+@onready var kills_bar: ProgressBar = $MarginContainer/VBoxContainer/KillsBar
+@onready var wave_label: Label = $MarginContainer/VBoxContainer/WaveLabel
+@onready var hp_container: HBoxContainer = $MarginContainer/VBoxContainer/HPContainer
 @onready var game_over_label: Label = $GameOverLabel
 @onready var wave_announce: Label = $WaveAnnounce
 @onready var boss_label: Label = $BossLabel
@@ -45,9 +45,8 @@ func _refresh_hearts(current_hp: int) -> void:
 	for child in hp_container.get_children():
 		child.queue_free()
 	for i in range(max_hp):
-		var heart = ColorRect.new()
-		heart.custom_minimum_size = Vector2(20, 20)
-		heart.color = Color(0.8, 0.1, 0.1) if i < current_hp else Color(0.3, 0.3, 0.3)
+		var heart = TextureRect.new()
+		heart.texture = load(Ref.Heart) if i < current_hp else load(Ref.EmptyHeart)
 		hp_container.add_child(heart)
 
 func _on_wave_started(wave_number: int) -> void:

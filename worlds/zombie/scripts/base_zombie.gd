@@ -10,7 +10,7 @@ func _on_death() -> void:
 	died.emit(self)
 	if randf() < drop_chance:
 		_drop_powerup()
-	queue_free()
+	call_deferred("queue_free")
 
 func _drop_powerup() -> void:
 	var powerup := POWERUP_SCENE.instantiate()

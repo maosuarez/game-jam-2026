@@ -148,7 +148,7 @@ blend_mode = 1
 
 [node name="BossCyclop" type="CharacterBody2D" unique_id=1310302431]
 script = ExtResource("1_cmo0e")
-hp = 20
+hp = 100
 damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1937038901]

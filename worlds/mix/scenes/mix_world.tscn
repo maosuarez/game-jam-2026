@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cu4h7ejlgokcn" path="res://worlds/zombie/scenes/player.tscn" id="4_2e0v1"]
 [ext_resource type="Texture2D" uid="uid://ddd85u8efh5bc" path="res://worlds/zombie/assets/tilesets/TileSetZombies.png" id="4_jukbn"]
 [ext_resource type="Script" uid="uid://dhd3p4kjfqx7o" path="res://worlds/mix/scripts/players.gd" id="4_qm1v5"]
+[ext_resource type="PackedScene" uid="uid://ctwaybbpqf7r4" path="res://worlds/zombie/scenes/zombie_basic.tscn" id="8_isqnl"]
+[ext_resource type="PackedScene" uid="uid://78bsejbpvbfw" path="res://worlds/dino/scenes/green_dino.tscn" id="9_5cj3b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g7qdn"]
 texture = ExtResource("1_pblq4")
@@ -371,6 +373,15 @@ remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="Players" unique_id=1041457616]
 position = Vector2(581, 620)
-zoom = Vector2(3, 3)
+zoom = Vector2(4.5, 4.5)
 limit_bottom = 820
 position_smoothing_enabled = true
+
+[node name="ZombieBasic" parent="." unique_id=1548598745 instance=ExtResource("8_isqnl")]
+position = Vector2(119, 445)
+
+[node name="ZombieBasic2" parent="." unique_id=2023140635 instance=ExtResource("8_isqnl")]
+position = Vector2(135, 564)
+
+[node name="Green Dino" parent="." unique_id=1031729652 instance=ExtResource("9_5cj3b")]
+position = Vector2(681, 623)

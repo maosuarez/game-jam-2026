@@ -6,11 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://dqn7vp5y2u7oi" path="res://worlds/zombie/assets/sprites/player/death.png" id="4_6ep58"]
 [ext_resource type="Script" uid="uid://q3n603k7g1e3" path="res://worlds/zombie/scripts/gun_pivot.gd" id="4_l1qox"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_tv3ts"]
-radius = 4.1231055
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l1qox"]
+radius = 5.0
+height = 16.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_g0jjj"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qpl0h"]
 radius = 6.0
+height = 18.0
 
 [sub_resource type="Animation" id="Animation_6ep58"]
 length = 0.001
@@ -377,14 +379,14 @@ collision_layer = 3
 script = ExtResource("1_amhjy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1082283211]
-shape = SubResource("CircleShape2D_tv3ts")
+shape = SubResource("CapsuleShape2D_l1qox")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1471723970 groups=["player_hitbox"]]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1095320935]
-shape = SubResource("CircleShape2D_g0jjj")
+shape = SubResource("CapsuleShape2D_qpl0h")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=848194262]
 texture = ExtResource("3_yronl")

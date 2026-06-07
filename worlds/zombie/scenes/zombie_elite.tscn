@@ -148,6 +148,7 @@ blend_mode = 1
 
 [node name="ZombieElite" type="CharacterBody2D" unique_id=322950927]
 script = ExtResource("1_x2p80")
+drop_chance = 0.8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2125197079]
 position = Vector2(0, -1)

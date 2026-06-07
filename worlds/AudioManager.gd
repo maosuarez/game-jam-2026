@@ -8,11 +8,11 @@ func create_stream_player(spKey: String, busName: String) -> void:
 	add_child(streamPlayers[spKey])
 
 func _ready():
-	create_stream_player("bgMusic", "BGMusic")
+	create_stream_player("BGMusic", "BGMusic")
 
 
-func bg_play_music(level: int):
-	var sp: AudioStreamPlayer = streamPlayers["bgMusic"]
+func bg_play_music(level: float):
+	var sp: AudioStreamPlayer = streamPlayers["BGMusic"]
 	sp.stream = load(Ref.BG_Music[level])
 	sp.volume_db = -15.0
 	sp.play(2.7)

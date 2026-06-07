@@ -148,6 +148,8 @@ height = 14.0
 
 [node name="ZombieBasic" type="CharacterBody2D" unique_id=1548598745]
 script = ExtResource("1_23obq")
+drop_chance = 0.4
+hp = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1791270568]
 texture = ExtResource("2_rdnc8")

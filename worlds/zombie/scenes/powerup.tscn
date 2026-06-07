@@ -1,11 +1,18 @@
 [gd_scene format=3 uid="uid://mb7rjf2d03g8"]
 
 [ext_resource type="Script" uid="uid://br6i2yue0x6p2" path="res://worlds/zombie/scripts/powerup.gd" id="1_641pj"]
+[ext_resource type="Texture2D" uid="uid://csjbpyvvg0kg3" path="res://worlds/zombie/assets/sprites/items/Potion.png" id="2_1bn23"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wp60r"]
+radius = 2.0
+height = 6.0
 
 [node name="PowerUp" type="Area2D" unique_id=142715664]
 script = ExtResource("1_641pj")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1270571521]
 scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_1bn23")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=588990616]
+shape = SubResource("CapsuleShape2D_wp60r")

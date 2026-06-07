@@ -22,7 +22,6 @@ func _refresh_hearts(current_hp: int) -> void:
 	for child in hp_container.get_children():
 		child.queue_free()
 	for i in range(max_hp):
-		var heart = ColorRect.new()
-		heart.custom_minimum_size = Vector2(20, 20)
-		heart.color = Color(0.8, 0.1, 0.1) if i < current_hp else Color(0.3, 0.3, 0.3)
+		var heart = TextureRect.new()
+		heart.texture = load(Ref.Heart) if i < current_hp else load(Ref.EmptyHeart)
 		hp_container.add_child(heart)

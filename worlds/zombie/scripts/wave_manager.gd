@@ -19,12 +19,14 @@ const PORTAL_SCENE = preload("res://worlds/zombie/scenes/portal.tscn")
 @export var spawn_interval: float = 2.0
 ## Mínima distancia del jugador al borde del arena para bloquear ese lado de spawn.
 @export var edge_margin: float = 80.0
+@export var map_min: Vector2 = Vector2(-415, -287)
+@export var map_max: Vector2 = Vector2(415, 287)
 
 @export var current_wave: int = 0
 var kills: int = 0
 var score: int = 0
-#var kills_per_wave: Array[int] = [15, 25, 40]
-var kills_per_wave: Array[int] = [1, 1, 1]
+var kills_per_wave: Array[int] = [15, 25, 40]
+#var kills_per_wave: Array[int] = [1, 1, 1]
 var total_waves: int = 3
 var state: State = State.WAITING
 var _spawn_timer: float = 0.0
@@ -41,7 +43,7 @@ func _physics_process(delta: float) -> void:
 		State.WAITING:
 			_delay_timer -= delta
 			if _delay_timer <= 0.0:
-				_start_next_wave()
+				_start_boss()
 		State.WAVE_ACTIVE:
 			_spawn_timer -= delta
 			if _spawn_timer <= 0.0:
@@ -61,9 +63,12 @@ func stop() -> void:
 
 func _start_next_wave() -> void:
 	current_wave += 1
+	if current_wave == 1: 
+		AudioManager.bg_play_music(2.0)
 	kills = 0
 	state = State.WAVE_ACTIVE
 	_spawn_timer = 0.5
+	spawn_interval = 2.0 / current_wave
 	wave_started.emit(current_wave)
 
 func _spawn_zombie() -> void:
@@ -81,10 +86,7 @@ func _get_spawn_position() -> Vector2:
 	var scene_root = get_tree().current_scene
 	if scene_root.has_node("Player"):
 		player_pos = scene_root.get_node("Player").global_position
-
-	# Bloquear un lado si el jugador está demasiado cerca del borde del arena.
-	# Así el enemigo no aparece fuera del mundo ni del lado opuesto visible.
-	# 0=arriba, 1=abajo, 2=izquierda, 3=derecha
+	
 	var available: Array[int] = []
 	if player_pos.y + arena_half_height > edge_margin:
 		available.append(0)
@@ -94,21 +96,29 @@ func _get_spawn_position() -> Vector2:
 		available.append(2)
 	if arena_half_width - player_pos.x > edge_margin:
 		available.append(3)
-
+	
 	if available.is_empty():
 		available = [0, 1, 2, 3]
+	
+	# Intenta hasta 10 veces encontrar una posición dentro del mapa
+	for attempt in range(10):
+		var side := available[randi() % available.size()]
+		var pos: Vector2
+		match side:
+			0: pos = Vector2(randf_range(-arena_half_width, arena_half_width), -arena_half_height) + player_pos
+			1: pos = Vector2(randf_range(-arena_half_width, arena_half_width), arena_half_height) + player_pos
+			2: pos = Vector2(-arena_half_width, randf_range(-arena_half_height, arena_half_height)) + player_pos
+			3: pos = Vector2(arena_half_width, randf_range(-arena_half_height, arena_half_height)) + player_pos
+		
+		# Verifica que esté dentro del mapa
+		if _is_within_map(pos):
+			return pos
+	
+	# Si no encontró ninguna válida, spawnea en el centro
+	return Vector2.ZERO
 
-	var side := available[randi() % available.size()]
-	match side:
-		0:  # arriba
-			return Vector2(randf_range(-arena_half_width, arena_half_width), -arena_half_height) + player_pos
-		1:  # abajo
-			return Vector2(randf_range(-arena_half_width, arena_half_width), arena_half_height) + player_pos
-		2:  # izquierda
-			return Vector2(-arena_half_width, randf_range(-arena_half_height, arena_half_height)) + player_pos
-		3:  # derecha
-			return Vector2(arena_half_width, randf_range(-arena_half_height, arena_half_height)) + player_pos
-	return player_pos
+func _is_within_map(pos: Vector2) -> bool:
+	return pos.x >= map_min.x and pos.x <= map_max.x and pos.y >= map_min.y and pos.y <= map_max.y
 
 func _on_zombie_died(zombie) -> void:
 	kills += 1
@@ -128,23 +138,31 @@ func _on_zombie_died(zombie) -> void:
 func clear_remaining_zombies() -> void:
 	for zombie in get_tree().get_nodes_in_group("zombies"):
 		zombie.call_deferred("queue_free")
+	for proj in get_tree().get_nodes_in_group("enemy_projectile"):
+		proj.call_deferred("queue_free")
 
 func deduct_score(amount: int) -> void:
 	score = max(0, score - amount * 50)
 	score_changed.emit(score)
 
 func _start_boss() -> void:
+	boss_spawned.emit()
 	state = State.BOSS_PHASE
+	for i in range(3):
+		Global.level.boss_alert.visible = true;
+		await get_tree().create_timer(0.5).timeout
+		Global.level.boss_alert.visible = false;
+		await get_tree().create_timer(0.5).timeout
+		print(i)
 	var boss = BOSS_SCENE.instantiate()
-	boss.global_position = Vector2(arena_half_width * 0.5, -arena_half_height * 0.5)
+	boss.global_position = Global.level.glitch_trigger.global_position
 	boss.defeated.connect(_on_boss_defeated)
 	get_tree().current_scene.add_child(boss)
-	boss_spawned.emit()
 
-func _on_boss_defeated() -> void:
+func _on_boss_defeated(pos: Vector2) -> void:
 	clear_remaining_zombies()
 	var portal = PORTAL_SCENE.instantiate()
-	portal.global_position = Vector2(arena_half_width * 0.5, -arena_half_height * 0.5)
+	portal.global_position = pos
 	get_tree().current_scene.add_child(portal)
 	score += 200
 	score_changed.emit(score)

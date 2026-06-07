@@ -76,7 +76,7 @@ func shoot_glitch_ray():
 	var glitch_ray = glitch_ray_scene.instantiate()
 	glitch_ray.global_position = glitch_ray_spawn.global_position
 	glitch_ray.direction = -1.0 if animation_component.sprite.flip_h else 1.0
-	get_tree().current_scene.add_child(glitch_ray)
+	get_tree().current_scene.entities.add_child(glitch_ray)
 	if randf() < 0.3:
 		animation_component.sprite.texture = Ref.PlayerSheets["normal"]
 		await get_tree().create_timer(randf_range(0.02, 0.15)).timeout

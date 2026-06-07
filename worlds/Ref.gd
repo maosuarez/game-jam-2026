@@ -17,8 +17,12 @@ var Cuchillo = "res://worlds/zombie/assets/sprites/items/Kunai.png"
 
 ##Background Music
 var BG_Music = {
-	1: "res://worlds/dino/assets/Nivel-Dinosaurio.mp3",
-	2: "res://worlds/zombie/Nivel-Zombies.mp3",
+	1.0: "res://worlds/dino/assets/Nivel-Dinosaurio.mp3",
+	2.0: "res://worlds/zombie/Nivel-Zombies.mp3",
 	2.1: "res://worlds/zombie/Nivel-Zombies-Boss.mp3",
-	3: "res://worlds/mix/Nivel-Final.mp3"
+	3.0: "res://worlds/mix/Nivel-Final.mp3"
 }
+
+
+var Heart = "res://worlds/zombie/assets/sprites/player/CorazonVida.png"
+var EmptyHeart = "res://worlds/zombie/assets/sprites/player/CorazonVacio.png"
